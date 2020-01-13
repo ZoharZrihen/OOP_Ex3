@@ -15,7 +15,6 @@ import java.awt.Color;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * this class represent a GUI for the graph, you can use it to draw random graph
@@ -140,15 +139,19 @@ public class Graph_Gui {
         }
             Iterator iter_f = fruits.iterator();
             while (iter_f.hasNext()) {
-                System.out.println(iter_f.next());
-                JSONObject f = new JSONObject(iter_f.next());
                 try {
+                    JSONObject f = new JSONObject(iter_f.next().toString());
                     JSONObject f2=f.getJSONObject("Fruit");
                     Point3D p = new Point3D(f2.getString("pos"));
                     int type= f2.getInt("type");
                     double value=f2.getDouble("value");
-                    StdDraw.picture(p.x(),p.y(),"criminal.png");
-                } catch (JSONException e) {
+                    if(type==1) {
+                        StdDraw.picture(p.x(), p.y(), "/gui/criminal.png", 0.0005, 0.0005);
+                    }
+                    if(type==-1){
+                        StdDraw.picture(p.x(), p.y(), "/gui/prisoner.png", 0.0007, 0.0005);
+                    }
+                    } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
