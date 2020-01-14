@@ -670,6 +670,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	 * @throws IllegalArgumentException unless both {@code canvasWidth} and
 	 *         {@code canvasHeight} are positive
 	 */
+
 	public static void setCanvasSize(int canvasWidth, int canvasHeight) {
 		if (canvasWidth <= 0 || canvasHeight <= 0)
 			throw new IllegalArgumentException("width and height must be positive");
@@ -677,7 +678,12 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 		height = canvasHeight;
 		init();
 	}
-
+	public static void setOffscreenImage(BufferedImage img){
+		offscreenImage=img;
+	}
+	public static void setOffscreen(Graphics2D gr){
+		offscreen=gr;
+	}
 	// init
 	private static void init() {
 		if (frame != null) frame.setVisible(false);

@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb59ccdd-7d01-4231-b4b2-d4f79fee923e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyGraph.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/MyGraph.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Ex3/gameClient/MyGameGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ex3/gameClient/MyGameGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Ex3/gui/Graph_Gui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ex3/gui/Graph_Gui.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/MyGameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/MyGameGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Graph_Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Graph_Gui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/1.obj" beforeDir="false" afterPath="$PROJECT_DIR$/data/1.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/2.obj" beforeDir="false" afterPath="$PROJECT_DIR$/data/2.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Ex3/gameClient/ThreadGameClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ex3/gameClient/ThreadGameClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameClient/ThreadGameClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/ThreadGameClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/StdDraw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/StdDraw.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -95,8 +95,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.ThreadGameClient" />
-        <item itemvalue="Application.MyGameGUI" />
         <item itemvalue="Application.SimpleGameClient" />
+        <item itemvalue="Application.MyGameGUI" />
       </list>
     </recent_temporary>
   </component>
@@ -128,9 +128,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/gameClient/Zone.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/src/gameClient/ThreadGameClient.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
