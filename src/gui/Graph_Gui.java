@@ -137,24 +137,7 @@ public class Graph_Gui {
 
             }
         }
-            Iterator iter_f = fruits.iterator();
-            while (iter_f.hasNext()) {
-                try {
-                    JSONObject f = new JSONObject(iter_f.next().toString());
-                    JSONObject f2=f.getJSONObject("Fruit");
-                    Point3D p = new Point3D(f2.getString("pos"));
-                    int type= f2.getInt("type");
-                    double value=f2.getDouble("value");
-                    if(type==1) {
-                        StdDraw.picture(p.x(), p.y(), "/gui/criminal.png", 0.0005, 0.0005);
-                    }
-                    if(type==-1){
-                        StdDraw.picture(p.x(), p.y(), "/gui/prisoner.png", 0.0007, 0.0005);
-                    }
-                    } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+
         }
 
 

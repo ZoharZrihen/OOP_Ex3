@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb59ccdd-7d01-4231-b4b2-d4f79fee923e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_2_8_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ex3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Ex3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyGraph.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/MyGraph.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Ex3/gameClient/MyGameGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ex3/gameClient/MyGameGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Ex3/gui/Graph_Gui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ex3/gui/Graph_Gui.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameClient/MyGameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/MyGameGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/Graph_Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Graph_Gui.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,7 +52,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.MyGameGUI">
+  <component name="RunManager" selected="Application.ThreadGameClient">
     <configuration name="MyGameGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="gameClient.MyGameGUI" />
       <module name="Ex3" />
@@ -77,8 +79,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ThreadGameClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="gameClient.ThreadGameClient" />
+      <module name="Ex3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="gameClient.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ThreadGameClient" />
         <item itemvalue="Application.MyGameGUI" />
         <item itemvalue="Application.SimpleGameClient" />
       </list>
@@ -107,5 +123,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/gameClient/Zone.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
