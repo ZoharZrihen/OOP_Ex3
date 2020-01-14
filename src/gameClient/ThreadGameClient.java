@@ -21,8 +21,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import static gameClient.MyGameGUI.DrawFruits;
-import static gameClient.MyGameGUI.DrawRobots;
+import static gameClient.MyGameGUI.*;
 
 public class ThreadGameClient implements Runnable {
     public static void main(String[] a) {
@@ -40,8 +39,8 @@ public class ThreadGameClient implements Runnable {
         game_service game = Game_Server.getServer(scenario);
         Zone play = new Zone(game);
         Graph_Gui gui = new Graph_Gui(play.getGraph());
-        StdDraw.enableDoubleBuffering();
-        BufferedImage buf = new BufferedImage(2000,1000,BufferedImage.TYPE_INT_ARGB);
+        //StdDraw.enableDoubleBuffering();
+        //BufferedImage buf = new BufferedImage(2000,1000,BufferedImage.TYPE_INT_ARGB);
       //  BufferedImage buf2 = new BufferedImage(2000,1000,BufferedImage.TYPE_INT_ARGB);
         gui.DrawGraph(2000, 1000, new Range(gui.minXPos() - 0.001, gui.maxXPos() + 0.001), new Range(gui.minYPos() - 0.001, gui.maxYPos() + 0.001), gui.getGr());
       //  Graphics2D gr = buf.createGraphics();
@@ -65,23 +64,17 @@ public class ThreadGameClient implements Runnable {
         }
 
         game.startGame();
+        StdDraw.enableDoubleBuffering();
         while (game.isRunning()) {
-        //         StdDraw.clear();
                 play=new Zone(game);
                 play.setRobots(game.getRobots());
                 moveRobots(game,play.getGraph());
-              //  StdDraw.picture(35,35,"MyGraph.jpg",1,1);
+                Drawgraph(gui.getGr());
                 DrawFruits(game.getFruits());
                 DrawRobots(play.getRobots());
-         //   StdDraw.show();
-
-          //  Graphics2D gr2 = buf2.createGraphics();
-           // StdDraw.setOffscreenImage(buf2);
-           // StdDraw.setOffscreen(gr2);
-
-          //  Graph_Gui gui2 = new Graph_Gui(play.getGraph());
-           // gui2.DrawGraph(2000, 1000, new Range(gui.minXPos() - 0.001, gui.maxXPos() + 0.001), new Range(gui.minYPos() - 0.001, gui.maxYPos() + 0.001), gui.getGr());
-
+                StdDraw.show();
+                StdDraw.pause(10);
+                StdDraw.clear();
         }
     }
     private static void moveRobots(game_service game, DGraph gg) {

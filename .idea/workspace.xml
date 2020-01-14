@@ -7,8 +7,9 @@
       <change beforePath="$PROJECT_DIR$/data/1.obj" beforeDir="false" afterPath="$PROJECT_DIR$/data/1.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/2.obj" beforeDir="false" afterPath="$PROJECT_DIR$/data/2.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Ex3/gameClient/ThreadGameClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ex3/gameClient/ThreadGameClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameClient/MyGameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/MyGameGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameClient/ThreadGameClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/ThreadGameClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/StdDraw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/StdDraw.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/Graph_Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Graph_Gui.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +130,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/gameClient/ThreadGameClient.java</url>
-          <line>50</line>
+          <line>49</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

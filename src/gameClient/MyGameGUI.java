@@ -2,8 +2,7 @@ package gameClient;
 
 import Server.Game_Server;
 import Server.game_service;
-import dataStructure.DGraph;
-import dataStructure.node_data;
+import dataStructure.*;
 import gui.Graph_Gui;
 import oop_dataStructure.OOP_DGraph;
 import org.json.JSONException;
@@ -13,6 +12,7 @@ import utils.Range;
 import utils.StdDraw;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -83,6 +83,34 @@ public class MyGameGUI {
         while(iter.hasNext()){
                 Robot r= (Robot) iter.next();
                 StdDraw.picture(r.getLocation().x(),r.getLocation().y(),"/gui/police.png",0.0007, 0.0005);
+        }
+    }
+    public static void Drawgraph(DGraph g){
+        Collection<node_data> nodes = g.getV();
+        Iterator iter = nodes.iterator();
+        while (iter.hasNext()) {
+            node n = (node) iter.next();
+            StdDraw.setPenColor(Color.BLACK);
+            StdDraw.setPenRadius(0.02);
+            StdDraw.point(n.getLocation().x(), n.getLocation().y());
+            int key = n.getKey();
+            StdDraw.text(n.getLocation().x() - 0.0001, n.getLocation().y() + 0.0002, Integer.toString(key));
+            Collection<edge_data> edges = g.getE(n.getKey());
+            Iterator iterE = edges.iterator();
+            while (iterE.hasNext()) {
+                edge e = (edge) iterE.next();
+                StdDraw.setPenColor(Color.RED);
+                StdDraw.setPenRadius(0.007);
+                Point3D p1 = g.getNode(e.getSrc()).getLocation();
+                Point3D p2 = g.getNode(e.getDest()).getLocation();
+                StdDraw.line(p1.x(), p1.y(), p2.x(), p2.y());
+                StdDraw.setPenColor(Color.BLUE);
+                StdDraw.text(p1.x() + 0.7 * (p2.x() - p1.x()) - 0.0003, p1.y() + 0.7 * (p2.y() - p1.y()) + 0.0002, String.format("%.1f", e.getWeight()));
+                StdDraw.setPenColor(Color.YELLOW);
+                StdDraw.setPenRadius(0.02);
+                StdDraw.point(p1.x() + 0.85 * (p2.x() - p1.x()), p1.y() + 0.85 * (p2.y() - p1.y()));
+
+            }
         }
     }
 
