@@ -109,7 +109,10 @@ public class SimpleGameClient {
 		int i=0;
 		while(i<r) {itr.next();i++;}
 		ans = itr.next().getDest();
+
+
 		return ans;
+
 	}
 
 }

@@ -13,12 +13,13 @@ public class Zone {
     private ArrayList<Robot> robots=new ArrayList<Robot>();
     private ArrayList<Fruit> fruits=new ArrayList<Fruit>();
     private DGraph graph;
+    private game_service game;
 
     public Zone(game_service game){
         graph=new DGraph();
         graph.init(game.getGraph());
         Json2Fruits(game.getFruits());
-
+        this.game=game;
     }
     private void Json2Fruits(List<String> fr) {
         Iterator iter_f = fr.iterator();
@@ -66,5 +67,11 @@ public class Zone {
 
     public void setGraph(DGraph graph) {
         this.graph = graph;
+    }
+    public void setGame(game_service game){
+        this.game=game;
+    }
+    public game_service getGame(){
+        return game;
     }
 }

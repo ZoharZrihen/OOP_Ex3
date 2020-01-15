@@ -54,7 +54,7 @@ public class MyGameGUI {
         game.startGame();
         // should be a Thread!!!
         while(game.isRunning()) {
-       //     moveRobots(game, gg);
+            //     moveRobots(game, gg);
         }
         String results = game.toString();
         System.out.println("Game Over: "+results);
@@ -81,8 +81,11 @@ public class MyGameGUI {
     public static void DrawRobots(List<Robot> robots){
         Iterator iter=robots.iterator();
         while(iter.hasNext()){
-                Robot r= (Robot) iter.next();
-                StdDraw.picture(r.getLocation().x(),r.getLocation().y(),"/gui/police.png",0.0007, 0.0005);
+            Robot r= (Robot) iter.next();
+            StdDraw.picture(r.getLocation().x(),r.getLocation().y(),"/gui/police.png",0.0007, 0.0005);
+            StdDraw.setPenColor(Color.red);
+            StdDraw.setPenRadius(0.009);
+            StdDraw.text(r.getLocation().x(),r.getLocation().y()+0.0005,Integer.toString(r.getKey()));
         }
     }
     public static void Drawgraph(DGraph g){
@@ -114,5 +117,5 @@ public class MyGameGUI {
         }
     }
 
-    }
+}
 

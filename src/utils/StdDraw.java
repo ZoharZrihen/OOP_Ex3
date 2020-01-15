@@ -63,21 +63,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.*;
-import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 
 import javax.swing.*;
 
 import algorithms.Graph_Algo;
 import dataStructure.DGraph;
-import dataStructure.edge;
-import dataStructure.edge_data;
-import dataStructure.graph;
 import dataStructure.node;
 import dataStructure.node_data;
-import utils.Point3D;
-import utils.Range;
 import gui.Graph_Gui;
 
 /**
@@ -575,6 +568,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	public static final Color PRINCETON_ORANGE = new Color(245, 128, 37);
 
 	private static DGraph gr=new DGraph();
+	public static MyGameGui1 game;
 
 	// default colors
 	private static final Color DEFAULT_PEN_COLOR   = BLACK;
@@ -719,7 +713,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);            // closes all windows
 		// frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);      // closes only current window
-		frame.setTitle("Standard Draw");
+		frame.setTitle("The maze of waze");
 		frame.setJMenuBar(createMenuBar());
 		frame.pack();
 		frame.requestFocusInWindow();
@@ -734,10 +728,10 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("File");
 		menuBar.add(menu);
-		JMenu menu1 = new JMenu("Algo");
+		JMenu menu1 = new JMenu("Start game");
 		menuBar.add(menu1);
 		JMenu menu2 = new JMenu("DGraph");
-		menuBar.add(menu2);
+	//	menuBar.add(menu2);
 		JMenuItem menuItem1 = new JMenuItem(" Save...   ");
 		menuItem1.addActionListener(std);
 		menuItem1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
@@ -746,15 +740,15 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 		JMenuItem menuItem10 = new JMenuItem(" Load...   ");
 		menuItem10.addActionListener((std));
 		menu.add(menuItem10);
-		JMenuItem menuItem2 = new JMenuItem(" Shortest Path   ");
+		JMenuItem menuItem2 = new JMenuItem("    Manual game  ");
 		menuItem2.addActionListener(std);
 		menu1.add(menuItem2);
-		JMenuItem menuItem22=new JMenuItem("    TSP     ");
+		JMenuItem menuItem22=new JMenuItem("    Automatic game    ");
 		menuItem22.addActionListener(std);
 		menu1.add(menuItem22);
 		JMenuItem menuItem3 = new JMenuItem(" Is Connected ?   ");
 		menuItem3.addActionListener(std);
-		menu1.add(menuItem3);
+		//menu1.add(menuItem3);
 		JMenuItem menuItem4 = new JMenuItem(" Add vertex   ");
 		menuItem4.addActionListener(std);
 		menu2.add(menuItem4);
@@ -1712,46 +1706,12 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 			Graph_Gui gg=new Graph_Gui(ga.getGr());
 			gg.DrawGraph(1000, 600, new Range(-10, 60), new Range(-10, 60),ga.getGr());
 		}
-		if(t.equals(" Shortest Path   ")){
-			Graph_Gui gg=new Graph_Gui(gr);
-			gg.DrawGraph(1000, 600, new Range(-10, 60), new Range(-10, 60),gg.getGr());
-			int src =Integer.parseInt(JOptionPane.showInputDialog(null,"Enter starting vertex id: "));
-			int dest =Integer.parseInt(JOptionPane.showInputDialog(null,"Enter ending vertex id: "));
-			Graph_Algo ga = new Graph_Algo();
-			ga.init(gr);
-			Collection<node_data> path=ga.shortestPath(src,dest);
-			StdDraw.setPenColor(Color.BLUE);
-			StdDraw.setPenRadius(0.5);
-			Iterator iter=path.iterator();
-			int i=0;
-			while(iter.hasNext()){
-				node_data n= (node_data) iter.next();
-				int key=n.getKey();
-				String t1=Integer.toString(key);
-				t1+=" ---> ";
-				StdDraw.text(10+i,50,t1);
-				i+=3;
-			}
-		}
-		if(t.equals(" Is Connected ?   ")) {
-			//Graph_Gui gg=new Graph_Gui(gr);
-			//gg.DrawGraph(1000, 600, new Range(-10, 60), new Range(-10, 60),gg.getGr());
-			Graph_Algo ga = new Graph_Algo();
-			ga.init(gr);
-			boolean ans = ga.isConnected();
-			if (ans) {
-				StdDraw.setPenColor(Color.BLUE);
-				StdDraw.setPenRadius(0.5);
-				StdDraw.text(10, 50, "It is connected!");
+		if(t.equals("    Manual game  ")){
 
 			}
-			if (!ans) {
-				StdDraw.setPenColor(Color.RED);
-				StdDraw.setPenRadius(0.5);
-				StdDraw.text(10, 50, "It is NOT connected");
 
+		if(t.equals("    Automatic game    ")) {
 
-			}
 		}
 		if(t.equals(" Add vertex   ")){
 			int key =Integer.parseInt(JOptionPane.showInputDialog(null,"Enter vertex id: "));

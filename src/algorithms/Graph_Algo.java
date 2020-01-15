@@ -181,32 +181,18 @@ public class Graph_Algo implements graph_algorithms, Serializable {
 	 */
 	@Override
 	public double shortestPathDist(int src, int dest) {
-		try {
-			setALLzero(gr);
-			setALLInfinity(gr);
-			PriorityQueue<node> pq = new PriorityQueue<node>(gr.getVertices().size(), new nodeComperator());
-			node s = (node) gr.getVertices().get(src);
-			s.setTag(src);    //set tag of source as it's own id
-			s.setWeight(0);
-			Object[] arr = gr.getEdges().get(s.getKey()).keySet().toArray();
-			addPq(pq, arr, s);
-			boolean visited=true;
-			while (!pq.isEmpty()&&visited) {
-				node x = pq.poll();
-				if(x.getInfo().equals("visited")){
-					break;
-				}
-				x.setInfo("visited");
-				Object[] ar = gr.getEdges().get(x.getKey()).keySet().toArray();
-				addPq(pq, ar, x);
+			ArrayList<node_data> a = (ArrayList<node_data>) shortestPath(src, dest);
+			if (a == null) {
+				return -1;
 			}
-			return gr.getVertices().get(dest).getWeight();
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error: Invalid src/dest or there is no path between src and dest");
-			return 0;
+			double sum = 0;
+			for (int i = 0; i < a.size() - 1; i++) {
+				edge_data e = gr.getEdge(a.get(i).getKey(), a.get(i + 1).getKey());
+				sum += e.getWeight();
+			}
+			return sum;
 		}
-	}
+
 
 	/**
 	 * This function implements the Dkjistra algorithm as it is.
@@ -237,25 +223,64 @@ public class Graph_Algo implements graph_algorithms, Serializable {
 			 */
 	@Override
 	public List<node_data> shortestPath(int src, int dest) {
-		List<node_data> ans = new ArrayList<node_data>();
-		Stack<node_data> stk = new Stack<>();                //stack to reverse list elements
-		//if (!isConnected()) return ans;					//try-catch?
-		if (src == dest) {                            //path of node to itself returns a single node in list
-			ans.add(gr.getNode(src));
-			return ans;
-		}
-		if (shortestPathDist(src, dest) == Double.MAX_VALUE) return ans;        //no path between nodes
+		if(gr.getNode(src)==null || gr.getNode(dest)==null)
+			return null;
+		try {
+			ArrayList<node_data> ans = new ArrayList<node_data>();
+			if(gr.getNode(src).equals(gr.getNode(dest))) {
+				ans.add(gr.getNode(src));
+				return ans;
+			}
+			PriorityQueue <node> notVisited = new PriorityQueue <node> (gr.nodeSize(),new nodeComperator());
+			Collection<node_data> c = gr.getV();
+			Iterator<node_data> itr = c.iterator();
+			while(itr.hasNext()) {
+				node n = (node) itr.next();
+				if(n.getKey()==src) {
+					n.setWeight(0);
 
-		stk.push(gr.getNode(dest));        //put destination in stack, it will be the last node in list
-		dest = gr.getNode(dest).getTag();    //set next node as previous node (tag from shortest path)
-		while (gr.getNode(dest).getKey() != src) {
-			stk.push(gr.getNode(dest));
-			dest = gr.getNode(dest).getTag();
+				} else {
+					n.setWeight(Integer.MAX_VALUE);
+
+				}
+				n.setInfo("");
+				n.setTag(0);
+				notVisited.add(n);
+			}
+			while(!notVisited.isEmpty()) {
+				//			System.out.println("src:"+src+", dest: "+dest+" pq: "+notVisited);
+				node_data n = notVisited.poll();
+				if(n.getKey()==dest && !n.getInfo().equals("")) {
+					ans.add(n);
+					while(!n.getInfo().equals("")) {
+						node_data newNode = gr.getNode(Integer.parseInt(n.getInfo()));
+						ans.add(0, newNode);
+						n = newNode;
+					}
+					//				ans.sort(new Node_Comparator());
+					return ans;
+				}
+				Collection<edge_data> outOfn = gr.getE(n.getKey());
+				Iterator<edge_data> itr2 = outOfn.iterator();
+				while(itr2.hasNext()) {
+					edge_data edge = itr2.next();
+					node d = (node) gr.getNode(edge.getDest());
+					if(d.getTag()==0) {
+						if(d.getWeight()>(n.getWeight() + edge.getWeight())) {
+							d.setWeight(n.getWeight() + edge.getWeight());
+							d.setInfo(""+n.getKey());
+							notVisited.remove(d);
+							notVisited.add(d);
+						}
+					}
+				}
+				n.setTag(1);
+			}
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		stk.push(gr.getNode(src));
-		while (!stk.isEmpty())
-			ans.add(stk.pop());
-		return ans;
+		return null;
 	}
 	/**
 	 * computes a relatively short path which visit each node in the targets List.
