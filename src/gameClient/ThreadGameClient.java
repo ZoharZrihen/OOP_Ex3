@@ -40,7 +40,9 @@ public class ThreadGameClient implements Runnable {
         game_service game = Game_Server.getServer(scenario);
         Zone play = new Zone(game);
         Graph_Gui gui = new Graph_Gui(play.getGraph());
-        gui.DrawGraph(2000, 1000, new Range(gui.minXPos() - 0.001, gui.maxXPos() + 0.001), new Range(gui.minYPos() - 0.001, gui.maxYPos() + 0.001), gui.getGr());
+        Range rangeX=new Range(gui.minXPos() - 0.001, gui.maxXPos() + 0.001);
+        Range rangeY=new Range(gui.minYPos() - 0.001, gui.maxYPos() + 0.001);
+        gui.DrawGraph(2000, 1000, rangeX, rangeY, gui.getGr());
         DrawFruits(play.getGame().getFruits());
         for (Fruit fruit : play.getFruits()){
             setEdgeForFruit(fruit,gui.getGr());
@@ -51,10 +53,10 @@ public class ThreadGameClient implements Runnable {
             JSONObject line = new JSONObject(info);
             JSONObject ttt = line.getJSONObject("GameServer");
             int numrobots = ttt.getInt("robots");
-            int fruts = 1;
+            int fruts = 2%play.getFruits().size();
             for (int i = 0; i < numrobots; i++) {
                 game.addRobot(play.getFruits().get(fruts).getEdge().getDest());
-                fruts=(fruts+2)%play.getFruits().size();
+                fruts=(fruts+1)%play.getFruits().size();
             }
             play.setRobots(game.getRobots());
             DrawRobots(play.getRobots());
@@ -73,6 +75,8 @@ public class ThreadGameClient implements Runnable {
                 play.setRobots(play.getGame().getRobots());
                 play.setFruits(play.getGame().getFruits());
                 moveRobots(play.getGame(), play.getGraph(), play);
+                //rangeX.get_length(),rangeY.get_length()
+                StdDraw.picture((gui.minXPos()+gui.maxXPos())/2,(gui.minYPos()+gui.maxYPos())/2,"/gui/Ariel.png",rangeX.get_length(),rangeY.get_length());
                 Drawgraph(gui.getGr());
                 DrawFruits(play.getGame().getFruits());
                 DrawRobots(play.getRobots());

@@ -129,12 +129,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/gameClient/ThreadGameClient.java</url>
-          <line>83</line>
+          <line>87</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/gameClient/ThreadGameClient.java</url>
-          <line>78</line>
+          <line>82</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
