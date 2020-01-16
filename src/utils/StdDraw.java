@@ -568,7 +568,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	public static final Color PRINCETON_ORANGE = new Color(245, 128, 37);
 
 	private static DGraph gr=new DGraph();
-	public static MyGameGui1 game;
+	//public static MyGameGui1 game;
 
 	// default colors
 	private static final Color DEFAULT_PEN_COLOR   = BLACK;

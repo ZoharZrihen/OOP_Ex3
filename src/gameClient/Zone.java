@@ -38,8 +38,22 @@ public class Zone {
     public ArrayList<Robot> getRobots() {
         return robots;
     }
-
+    public void setFruits(List<String> fr){
+        fruits.clear();
+        Iterator iter_f = fr.iterator();
+        while (iter_f.hasNext()) {
+            try {
+                JSONObject f = new JSONObject(iter_f.next().toString());
+                JSONObject f2 = f.getJSONObject("Fruit");
+                Fruit fru = new Fruit(f2);
+                fruits.add(fru);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public void setRobots(List<String> robots) {
+            this.robots.clear();
             Iterator iter_f = robots.iterator();
             while (iter_f.hasNext()) {
                 try {

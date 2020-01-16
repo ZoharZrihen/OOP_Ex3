@@ -62,18 +62,21 @@ public class ThreadGameClient implements Runnable {
         // StdDraw.text(p.x(), p.y() + 0.001, "Please click on Robot to start, then select destination to move");
         StdDraw.enableDoubleBuffering();
         play.getGame().startGame();
-          /*  while (game.isRunning()) {
-                play = new Zone(game);
-                play.setRobots(game.getRobots());
-                moveRobots(game, play.getGraph(), play);
+            while (play.getGame().isRunning()) {
+              //  play = new Zone(game);
+                play.setRobots(play.getGame().getRobots());
+                play.setFruits(play.getGame().getFruits());
+                moveRobots(play.getGame(), play.getGraph(), play);
                 Drawgraph(gui.getGr());
-                DrawFruits(game.getFruits());
+                DrawFruits(play.getGame().getFruits());
                 DrawRobots(play.getRobots());
                 StdDraw.show();
+            //
                 StdDraw.pause(10);
                 StdDraw.clear();
-            }*/
-        while (play.getGame().isRunning()) {
+            }
+     //   System.out.println(game.toString());
+      /**  while (play.getGame().isRunning()) {
             play.setRobots(game.getRobots());
             int robotnum = Integer.parseInt(JOptionPane.showInputDialog(null, "Please choose robot id to move"));
             int dest = Integer.parseInt(JOptionPane.showInputDialog(null, "Please choose destination to move the robot"));
@@ -103,7 +106,7 @@ public class ThreadGameClient implements Runnable {
                     }
                 }
             }
-        }
+        }**/
     }
 
     private void moveRobots(game_service game, DGraph gg,Zone play) {
@@ -120,7 +123,7 @@ public class ThreadGameClient implements Runnable {
                     int dest = ttt.getInt("dest");
 
                     if(dest==-1) {
-                        dest = nextNode(gg, src,play);
+                        dest = nextNod(gg, src,play);
                         game.chooseNextEdge(rid, dest);
                         game.move();
                         System.out.println("Turn to node: "+dest+"  time to end:"+(t/1000));
@@ -131,7 +134,48 @@ public class ThreadGameClient implements Runnable {
             }
         }
     }
-    private int nextNode(DGraph g, int src, Zone play) {
+    private int nextNod(DGraph g, int src, Zone play){
+        int ans = -1;
+        Collection<edge_data> ee = g.getE(src);
+        Iterator<edge_data> itr = ee.iterator();
+        ArrayList<Fruit> fruits=play.getFruits();
+        Fruit close = closeFrt(g,src,fruits);
+        if (close.getEdge().getDest() == src)
+            return close.getEdge().getSrc();
+        Graph_Algo ga=new Graph_Algo(g);
+        List<node_data> nodes=ga.shortestPath(src,close.getEdge().getDest());
+     //   if (nodes.size()>1)
+            return nodes.get(1).getKey();
+      //  else return nodes.get(0).getKey();
+    }
+    private Fruit closeFrt(DGraph g, int src,ArrayList<Fruit> fruits) {
+        double min = Double.MAX_VALUE;
+        Fruit res = null;
+        // int ans = -1;
+        Point3D s = g.getNode(src).getLocation();
+        Iterator<Fruit> iter = fruits.iterator();
+        while (iter.hasNext()) {
+            Fruit f = iter.next();
+            if (f.getEdge() == null) {
+                setEdgeForFruit(f, g);
+            }
+            Graph_Algo ga = new Graph_Algo(g);
+            double dist;
+            if (src!=f.getEdge().getSrc() && src!=f.getEdge().getDest())
+                dist = ga.shortestPathDist(src, f.getEdge().getSrc()) + g.getNode(f.getEdge().getSrc()).getLocation().distance3D(g.getNode(f.getEdge().getDest()).getLocation());
+            else if (src==f.getEdge().getSrc())
+                dist = g.getNode(src).getLocation().distance3D(g.getNode(f.getEdge().getDest()).getLocation());
+            else
+                dist = 2*g.getNode(f.getEdge().getDest()).getLocation().distance3D(g.getNode(src).getLocation());
+            if (dist < min) {
+                min = dist;
+                res = f;
+            }
+
+        }
+        return res;
+    }
+  /**  private int nextNode(DGraph g, int src, Zone play) {
         int ans = -1;
         Collection<edge_data> ee = g.getE(src);
         Iterator<edge_data> itr = ee.iterator();
@@ -139,11 +183,14 @@ public class ThreadGameClient implements Runnable {
         int r = (int)(Math.random()*s);
         int i=0;
         while(i<r) {itr.next();i++;}
-        ans = itr.next().getDest();*/
+        ans = itr.next().getDest();
         ArrayList<Fruit> fruits=play.getFruits();
         int dest=ClosestFruit(g,src,fruits);
+        if (dest == src) {
+            dest--;
+            return dest;
+        }
         Graph_Algo ga=new Graph_Algo(g);
-        //System.out.println(ga.shortestPathDist(0,4)+"zoharrrrrr");
         List<node_data> nodes=ga.shortestPath(src,dest);
         Iterator<node_data> iter=nodes.iterator();
         while(iter.hasNext()){
@@ -178,7 +225,10 @@ public class ThreadGameClient implements Runnable {
             }
         }
         return ans;
-    }
+    }**/
+   // private int CloseFruit(DGraph g,int src, ArrayList<Fruit> fruits){
+//return 0;
+  //  }
     public void setEdgeForFruit(Fruit f, DGraph g) {
         Point3D sf = f.getLocation();
         Iterator<node_data> iterNode = g.getV().iterator();
