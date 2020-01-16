@@ -41,14 +41,20 @@ public class ThreadGameClient implements Runnable {
         Zone play = new Zone(game);
         Graph_Gui gui = new Graph_Gui(play.getGraph());
         gui.DrawGraph(2000, 1000, new Range(gui.minXPos() - 0.001, gui.maxXPos() + 0.001), new Range(gui.minYPos() - 0.001, gui.maxYPos() + 0.001), gui.getGr());
-        DrawFruits(game.getFruits());
-        String info = game.toString();
+        DrawFruits(play.getGame().getFruits());
+        for (Fruit fruit : play.getFruits()){
+            setEdgeForFruit(fruit,gui.getGr());
+        }
+
+        String info = play.getGame().toString();
         try {
             JSONObject line = new JSONObject(info);
             JSONObject ttt = line.getJSONObject("GameServer");
             int numrobots = ttt.getInt("robots");
+            int fruts = 1;
             for (int i = 0; i < numrobots; i++) {
-                game.addRobot(i);
+                game.addRobot(play.getFruits().get(fruts).getEdge().getDest());
+                fruts=(fruts+2)%play.getFruits().size();
             }
             play.setRobots(game.getRobots());
             DrawRobots(play.getRobots());

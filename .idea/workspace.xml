@@ -2,40 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb59ccdd-7d01-4231-b4b2-d4f79fee923e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/$PRODUCT_WORKSPACE_FILE$" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/$PRODUCT_WORKSPACE_FILE$" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_2_8_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_2_8_5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ex3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Ex3.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyGraph.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/MyGraph.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/1.obj" beforeDir="false" afterPath="$PROJECT_DIR$/data/1.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/2.obj" beforeDir="false" afterPath="$PROJECT_DIR$/data/2.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Ex3/gameClient/ThreadGameClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ex3/gameClient/ThreadGameClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Ex3/gameClient/Zone.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ex3/gameClient/Zone.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Ex3/utils/StdDraw.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ex3/utils/StdDraw.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/algorithms/Graph_Algo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithms/Graph_Algo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/algorithms/graph_algorithms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithms/graph_algorithms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataStructure/DGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataStructure/DGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataStructure/edge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataStructure/edge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataStructure/edge_data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataStructure/edge_data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataStructure/graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataStructure/graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataStructure/node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataStructure/node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataStructure/nodeComperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataStructure/nodeComperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataStructure/node_data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataStructure/node_data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/Fruit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Fruit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/MyGameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/MyGameGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Robot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/SimpleGameClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/SimpleGameClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameClient/ThreadGameClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/ThreadGameClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/Zone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Zone.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Graph_Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Graph_Gui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Point3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Point3D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Range.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/StdDraw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/StdDraw.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -158,13 +129,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/gameClient/ThreadGameClient.java</url>
-          <line>77</line>
+          <line>83</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/gameClient/ThreadGameClient.java</url>
-          <line>168</line>
-          <option name="timeStamp" value="21" />
+          <line>78</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
