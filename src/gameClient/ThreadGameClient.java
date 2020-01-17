@@ -8,55 +8,50 @@ import dataStructure.DGraph;
 import dataStructure.edge_data;
 import dataStructure.node_data;
 import gui.Graph_Gui;
-import oop_dataStructure.oop_edge_data;
 import org.json.JSONException;
 import org.json.JSONObject;
 import utils.Point3D;
 import utils.Range;
 import utils.StdDraw;
-
 import javax.swing.*;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
-
 import static gameClient.MyGameGUI.*;
 
+/**
+ * This class is a thread of the game.
+ * The user runs this class and his game begins.
+ * user need to choose level to play [0-23] and
+ * way to play (automatic or manual) and then the game begins.
+ * Goal of the game is to eat as many fruits as possible in the given time.
+ */
 public class ThreadGameClient implements Runnable {
     public static void main(String[] a) {
         Thread thread = new Thread(new ThreadGameClient());
         thread.start();
     }
-
-    public static void init() {
-
-    }
-
-
     public void run() {
         int scenario = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your scenario number: "));
         game_service game = Game_Server.getServer(scenario);
         Zone play = new Zone(game);
         Graph_Gui gui = new Graph_Gui(play.getGraph());
-        Range rangeX=new Range(gui.minXPos() - 0.001, gui.maxXPos() + 0.001);
-        Range rangeY=new Range(gui.minYPos() - 0.001, gui.maxYPos() + 0.001);
+        Range rangeX = new Range(gui.minXPos() - 0.001, gui.maxXPos() + 0.001);
+        Range rangeY = new Range(gui.minYPos() - 0.001, gui.maxYPos() + 0.001);
         gui.DrawGraph(2000, 1000, rangeX, rangeY, gui.getGr());
         DrawFruits(play.getGame().getFruits());
-        for (Fruit fruit : play.getFruits()){
-            setEdgeForFruit(fruit,gui.getGr());
+        for (Fruit fruit : play.getFruits()) {
+            setEdgeForFruit(fruit, gui.getGr());
         }
-
         String info = play.getGame().toString();
         try {
             JSONObject line = new JSONObject(info);
             JSONObject ttt = line.getJSONObject("GameServer");
             int numrobots = ttt.getInt("robots");
-            int fruts = 2%play.getFruits().size();
+            int fruts = 2 % play.getFruits().size();
             for (int i = 0; i < numrobots; i++) {
                 game.addRobot(play.getFruits().get(fruts).getEdge().getDest());
-                fruts=(fruts+1)%play.getFruits().size();
+                fruts = (fruts + 1) % play.getFruits().size();
             }
             play.setRobots(game.getRobots());
             DrawRobots(play.getRobots());
@@ -64,62 +59,37 @@ public class ThreadGameClient implements Runnable {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //Point3D p = play.getGraph().getNode(3).getLocation();
-        //StdDraw.setPenColor(Color.BLACK);
-        //StdDraw.setPenRadius(0.005);
-        // StdDraw.text(p.x(), p.y() + 0.001, "Please click on Robot to start, then select destination to move");
+        Point3D p = play.getGraph().getNode(3).getLocation();
+        StdDraw.setPenColor(Color.BLACK);
+        StdDraw.setPenRadius(0.005);
+        StdDraw.text(p.x(), p.y() + 0.001, "Please press start game and then choose your option to start");
         StdDraw.enableDoubleBuffering();
-        play.getGame().startGame();
-            while (play.getGame().isRunning()) {
-              //  play = new Zone(game);
-                play.setRobots(play.getGame().getRobots());
-                play.setFruits(play.getGame().getFruits());
-                moveRobots(play.getGame(), play.getGraph(), play);
-                //rangeX.get_length(),rangeY.get_length()
-                StdDraw.picture((gui.minXPos()+gui.maxXPos())/2,(gui.minYPos()+gui.maxYPos())/2,"/gui/Ariel.png",rangeX.get_length(),rangeY.get_length());
-                Drawgraph(gui.getGr());
-                DrawFruits(play.getGame().getFruits());
-                DrawRobots(play.getRobots());
-                StdDraw.show();
-            //
-                StdDraw.pause(10);
-                StdDraw.clear();
-            }
-     //   System.out.println(game.toString());
-      /**  while (play.getGame().isRunning()) {
-            play.setRobots(game.getRobots());
-            int robotnum = Integer.parseInt(JOptionPane.showInputDialog(null, "Please choose robot id to move"));
-            int dest = Integer.parseInt(JOptionPane.showInputDialog(null, "Please choose destination to move the robot"));
-            List<String> log = play.getGame().move();
-            if (log != null) {
-                long t = play.getGame().timeToEnd();
-                for (int i = 0; i < log.size(); i++) {
-                    String robot_json = log.get(i);
-                    try {
-                        JSONObject line = new JSONObject(robot_json);
-                        JSONObject ttt = line.getJSONObject("Robot");
-                        int rid = ttt.getInt("id");
-                        int src = ttt.getInt("src");
-                        int d = ttt.getInt("dest");
-                        if(d==-1) {
-                            play.getGame().chooseNextEdge(robotnum, dest);
-                            play.getGame().move();
-                        }
-                        Drawgraph(gui.getGr());
-                        DrawFruits(play.getGame().getFruits());
-                        DrawRobots(play.getRobots());
-                        StdDraw.show();
-                        StdDraw.pause(10);
-                        StdDraw.clear();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }**/
+        StdDraw.clear();
+        StdDraw.setPlay(play);
+        StdDraw.setGui(gui);
+        StdDraw.setRangeX(rangeX);
+        StdDraw.setRangeY(rangeY);
+        while (!StdDraw.isAutomatic() && !StdDraw.isManual()) {
+            System.out.print("");
+        }
+        if (StdDraw.isAutomatic()) {
+            Automatic(play, gui, rangeX, rangeY);
+        }
+        if(StdDraw.isManual()){
+            Manual(play, gui, rangeX, rangeY);
+        }
     }
 
-    private void moveRobots(game_service game, DGraph gg,Zone play) {
+    /**
+     * This function makes the robot to move in automatic way and makes the robots to eat
+     * as much fruits as possible.
+     * function gets information about the robots in the game from the server,
+     * then sending it to next node function to choose best place to move the robots.
+     * @param game the game from the server that runs
+     * @param gg the graph of the game.
+     * @param play the Zone with all the information about the game.
+     */
+    private void moveRobots(game_service game, DGraph gg, Zone play) {
         List<String> log = game.move();
         if(log!=null) {
             long t = game.timeToEnd();
@@ -144,21 +114,69 @@ public class ThreadGameClient implements Runnable {
             }
         }
     }
+
+    /**
+     * This function makes the robots to move in manual way by getting information from the user.
+     * User choose the robot he wants to move (by the robot id),
+     * then choose destination to move the robot to.
+     * the destination must be to a node that is neighbour of the current robot's node location.
+     * @param game game that the user plays
+     * @param gg the graph of the game
+     * @param play the Zone with all the game information
+     */
+    private void MoveRobotManual(game_service game, DGraph gg, Zone play){
+        List<String> log = game.move();
+        if(log!=null) {
+            long t = game.timeToEnd();
+            for(int i=0;i<log.size();i++) {
+                String robot_json = log.get(i);
+                try {
+                    JSONObject line = new JSONObject(robot_json);
+                    JSONObject ttt = line.getJSONObject("Robot");
+                    int dest = ttt.getInt("dest");
+
+                    if(dest==-1) {
+                        int rid = Integer.parseInt(JOptionPane.showInputDialog(null, "Please choose robot id to move"));
+                        dest = Integer.parseInt(JOptionPane.showInputDialog(null, "Please choose destination to move the robot"));
+                        game.chooseNextEdge(rid, dest);
+                        game.move();
+                        System.out.println("Turn to node: "+dest+"  time to end:"+(t/1000));
+                        System.out.println(ttt);
+                    }
+                }
+                catch (JSONException e) {e.printStackTrace();}
+            }
+        }
+    }
+
+    /**
+     * This function uses our graph algorithm function to get the best way to the closest fruit in the game.
+     * By using our algorithm we get the best path to the fruit and then
+     * sending to robot to the next node in the path.
+     * @param g the graph of the game
+     * @param src the place the robot is
+     * @param play
+     * @return
+     */
     private int nextNod(DGraph g, int src, Zone play){
         int ans = -1;
-        Collection<edge_data> ee = g.getE(src);
-        Iterator<edge_data> itr = ee.iterator();
         ArrayList<Fruit> fruits=play.getFruits();
         Fruit close = closeFrt(g,src,fruits);
         if (close.getEdge().getDest() == src)
             return close.getEdge().getSrc();
         Graph_Algo ga=new Graph_Algo(g);
         List<node_data> nodes=ga.shortestPath(src,close.getEdge().getDest());
-     //   if (nodes.size()>1)
             return nodes.get(1).getKey();
-      //  else return nodes.get(0).getKey();
     }
-    private Fruit closeFrt(DGraph g, int src,ArrayList<Fruit> fruits) {
+
+    /**
+     * This function finding the closest fruit to the src location.
+     * @param g the graph of the game
+     * @param src the location where the robot is.
+     * @param fruits the list of the current fruits of the game.
+     * @return
+     */
+    private Fruit closeFrt(DGraph g, int src, ArrayList<Fruit> fruits) {
         double min = Double.MAX_VALUE;
         Fruit res = null;
         // int ans = -1;
@@ -185,60 +203,16 @@ public class ThreadGameClient implements Runnable {
         }
         return res;
     }
-  /**  private int nextNode(DGraph g, int src, Zone play) {
-        int ans = -1;
-        Collection<edge_data> ee = g.getE(src);
-        Iterator<edge_data> itr = ee.iterator();
-     /*   int s = ee.size();
-        int r = (int)(Math.random()*s);
-        int i=0;
-        while(i<r) {itr.next();i++;}
-        ans = itr.next().getDest();
-        ArrayList<Fruit> fruits=play.getFruits();
-        int dest=ClosestFruit(g,src,fruits);
-        if (dest == src) {
-            dest--;
-            return dest;
-        }
-        Graph_Algo ga=new Graph_Algo(g);
-        List<node_data> nodes=ga.shortestPath(src,dest);
-        Iterator<node_data> iter=nodes.iterator();
-        while(iter.hasNext()){
-            int key=iter.next().getKey();
-            if(key!=src){
-                ans=key;
-                break;
-            }
-        }
-        return ans;
-    }
-    private int ClosestFruit(DGraph g, int src,ArrayList<Fruit> fruits){
-        double min=Double.MAX_VALUE;
-        int ans=-1;
-        Point3D s=g.getNode(src).getLocation();
-        Iterator<Fruit> iter=fruits.iterator();
-        while(iter.hasNext()){
-            Fruit f=iter.next();
-            if(f.getEdge()==null) {
-                setEdgeForFruit(f, g);
-            }
-            Point3D d=f.getLocation();
-            double dist=Math.sqrt(Math.pow(s.x()-d.x(),2)+Math.pow(s.y()-d.y(),2));
-            if(dist<min){
-                min=dist;
-                if(f.getType()==-1){
-                    ans=f.getEdge().getDest();
-                }
-                if(f.getType()==1){
-                    ans=f.getEdge().getSrc();
-                }
-            }
-        }
-        return ans;
-    }**/
-   // private int CloseFruit(DGraph g,int src, ArrayList<Fruit> fruits){
-//return 0;
-  //  }
+
+    /**
+     * This function sets for fruit f an edge by its location.
+     * The function is searching in the graph for the edge the fruit is located on.
+     * We know that we found the right edge if the distance of the fruit from the src of the edge
+     * plus the distance of the fruit to the dest of the edge is equal(or almost equal)
+     * to the destination from src of the edge to dest of the edge.
+     * @param f the fruit to sets edge for it
+     * @param g the graph of the game
+     */
     public void setEdgeForFruit(Fruit f, DGraph g) {
         Point3D sf = f.getLocation();
         Iterator<node_data> iterNode = g.getV().iterator();
@@ -257,31 +231,65 @@ public class ThreadGameClient implements Runnable {
             }
         }
     }
-    public double Distance(Point3D a,Point3D b){
+
+    /**
+     * simple function to calculate distance between 2 points.
+     * @param a
+     * @param b
+     * @return
+     */
+    public double Distance(Point3D a, Point3D b){
         return Math.sqrt(Math.pow(a.x()-b.x(),2)+Math.pow(a.y()-b.y(),2));
     }
-    private Robot ComparetoRobot(List<Robot>robots,Point3D p ){
-        Iterator<Robot> iter=robots.iterator();
-        while(iter.hasNext()){
-            Robot r=iter.next();
-            if(r.getLocation()==p){
-                return r;
-            }
+
+    /**
+     * This function manages the game in automatic way, by using automatic moves of the robots.
+     * @param play the Zone with all the information about the game
+     * @param gui our function to open GUI window and draw the graph
+     * @param rangeX
+     * @param rangeY
+     */
+    public void Automatic(Zone play, Graph_Gui gui, Range rangeX, Range rangeY){
+        play.getGame().startGame();
+        while (play.getGame().isRunning()) {
+            play.setRobots(play.getGame().getRobots());
+            play.setFruits(play.getGame().getFruits());
+            moveRobots(play.getGame(), play.getGraph(), play);
+            StdDraw.picture((gui.minXPos()+gui.maxXPos())/2,(gui.minYPos()+gui.maxYPos())/2,"/gui/Ariel.png",rangeX.get_length(),rangeY.get_length());
+            Drawgraph(gui.getGr());
+            DrawFruits(play.getGame().getFruits());
+            DrawRobots(play.getRobots());
+            StdDraw.show();
+            StdDraw.pause(10);
+            StdDraw.clear();
         }
-        return null;
+        String results = play.getGame().toString();
+        System.out.println("Game Over: "+results);
     }
-    private void MoveRobot(Robot r,game_service game,DGraph g ){
-        if(StdDraw.isMousePressed()){
-            int dest=-1;
-            Point3D p=new Point3D(StdDraw.mouseX(),StdDraw.mouseY(),0);
-            Iterator<node_data>iter=g.getV().iterator();
-            while(iter.hasNext()){
-                node_data n=iter.next();
-                if(p==n.getLocation())
-                    dest=n.getKey();
-            }
-            game.chooseNextEdge(r.getKey(),dest);
-            game.move();
+
+    /**
+     * This function manages the game in manual way by using Manual moves of the robots, choosen by the user.
+     *
+     * @param play
+     * @param gui
+     * @param rangeX
+     * @param rangeY
+     */
+    public void Manual(Zone play,Graph_Gui gui,Range rangeX,Range rangeY) {
+        play.getGame().startGame();
+        while (play.getGame().isRunning()) {
+            play.setRobots(play.getGame().getRobots());
+            play.setFruits(play.getGame().getFruits());
+            MoveRobotManual(play.getGame(), play.getGraph(), play);
+            StdDraw.picture((gui.minXPos() + gui.maxXPos()) / 2, (gui.minYPos() + gui.maxYPos()) / 2, "/gui/Ariel.png", rangeX.get_length(), rangeY.get_length());
+            Drawgraph(gui.getGr());
+            DrawFruits(play.getGame().getFruits());
+            DrawRobots(play.getRobots());
+            StdDraw.show();
+            StdDraw.pause(10);
+            StdDraw.clear();
         }
+        String results = play.getGame().toString();
+        System.out.println("Game Over: " + results);
     }
-}
+    }

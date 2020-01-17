@@ -9,18 +9,32 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * This class represent the Zone (Arena) of the game
+ * in the Zone we store all the information about the game from the game server.
+ * each list (robots,fruits) is dynamic and get updated all the time.
+ */
 public class Zone {
     private ArrayList<Robot> robots=new ArrayList<Robot>();
     private ArrayList<Fruit> fruits=new ArrayList<Fruit>();
     private DGraph graph;
     private game_service game;
 
+    /**
+     * This constructor get a game and init all the params with the information from the game.
+     * @param game the game the user plays.
+     */
     public Zone(game_service game){
         graph=new DGraph();
         graph.init(game.getGraph());
         Json2Fruits(game.getFruits());
         this.game=game;
     }
+
+    /**
+     * Function to convert a Json list of fruits to list of fruits.
+     * @param fr Json list to convert
+     */
     private void Json2Fruits(List<String> fr) {
         Iterator iter_f = fr.iterator();
         while (iter_f.hasNext()) {
@@ -38,6 +52,7 @@ public class Zone {
     public ArrayList<Robot> getRobots() {
         return robots;
     }
+
     public void setFruits(List<String> fr){
         fruits.clear();
         Iterator iter_f = fr.iterator();

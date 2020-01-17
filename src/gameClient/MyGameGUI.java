@@ -17,48 +17,20 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * This class has functions for the GUI of the game.
+ * The functions of the class draws all the game items.
+ */
 public class MyGameGUI {
     public static void main(String[] a) {
-        init();}
 
-    public static void init(){
-        int scenario = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter your scenario number: "));
-        game_service game = Game_Server.getServer(scenario);
-        String g=game.getGraph();
-        DGraph gg= new DGraph();
-        gg.init(g);
-        Graph_Gui gui=new Graph_Gui(gg);
-        gui.DrawGraph(2000, 1000, new Range(gui.minXPos()-0.001,gui.maxXPos()+0.001), new Range(gui.minYPos()-0.001, gui.maxYPos()+0.001),gui.getGr());
-        DrawFruits(game.getFruits());
-        String info = game.toString();
-        JSONObject line;
-        try {
-            line = new JSONObject(info);
-            JSONObject ttt = line.getJSONObject("GameServer");
-            int rs = ttt.getInt("robots");
-            System.out.println(info);
-            System.out.println(g);
-            int fruits=ttt.getInt("fruits");
-            System.out.println(fruits);
-            Iterator<String> f_iter = game.getFruits().iterator();
-
-            while(f_iter.hasNext()) {
-
-            }
-            int src_node = 0;  // arbitrary node, you should start at one of the fruits
-            for(int a = 0;a<rs;a++) {
-                game.addRobot(src_node+a);
-            }
-        }
-        catch (JSONException e) {e.printStackTrace();}
-        game.startGame();
-        // should be a Thread!!!
-        while(game.isRunning()) {
-            //     moveRobots(game, gg);
-        }
-        String results = game.toString();
-        System.out.println("Game Over: "+results);
     }
+
+    /**
+     * Convert the list of the fruits from the server to the GUI and draw the icon (criminal)
+     * in the location of the fruit.
+     * @param fruits lists of fruits from the server to draw.
+     */
     public static void DrawFruits(List<String> fruits){
         Iterator iter_f = fruits.iterator();
         while (iter_f.hasNext()) {
@@ -78,6 +50,12 @@ public class MyGameGUI {
         }
 
     }
+
+    /**
+     * This function gets list of robots and draw each robot by its location on the map
+     * with the police car icon.
+     * @param robots list of robots to draw
+     */
     public static void DrawRobots(List<Robot> robots){
         Iterator iter=robots.iterator();
         while(iter.hasNext()){
@@ -88,6 +66,11 @@ public class MyGameGUI {
             StdDraw.text(r.getLocation().x(),r.getLocation().y()+0.0005,Integer.toString(r.getKey()));
         }
     }
+
+    /**
+     * This function gets a graph and draws it by draw each node and edge of the graph in its location.
+     * @param g graph to draw
+     */
     public static void Drawgraph(DGraph g){
         Collection<node_data> nodes = g.getV();
         Iterator iter = nodes.iterator();

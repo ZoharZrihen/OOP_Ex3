@@ -9,12 +9,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import utils.Point3D;
 
+/**
+ * This class represents a fruit in the game.
+ * each fruit belongs to edge in the graph (by location).
+ * there are 2 types of fruits -1(fruit can be eatn from high to low) or 1(from low to high).
+ * each fruit as value (the higher the value is, more score for the player)
+ */
 public class Fruit {
     private edge_data edge;
     private Point3D location;
     private int type;
     private double value;
 
+    /**
+     * this constructor convert JSON string to fruit object.
+     * @param str the JSON string with all the information about the fruit.
+     * @throws JSONException
+     */
     public Fruit(JSONObject str) throws JSONException {
         location = new Point3D(str.getString("pos"));
         type= str.getInt("type");

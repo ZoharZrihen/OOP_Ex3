@@ -71,7 +71,10 @@ import algorithms.Graph_Algo;
 import dataStructure.DGraph;
 import dataStructure.node;
 import dataStructure.node_data;
+import gameClient.ThreadGameClient;
+import gameClient.Zone;
 import gui.Graph_Gui;
+import gameClient.ThreadGameClient.*;
 
 /**
  *  The {@code StdDraw} class provides a basic capability for
@@ -568,7 +571,12 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	public static final Color PRINCETON_ORANGE = new Color(245, 128, 37);
 
 	private static DGraph gr=new DGraph();
-	//public static MyGameGui1 game;
+	private static boolean automatic=false;
+	private static boolean manual=false;
+	private static Zone play;
+	private static Graph_Gui gui;
+	private static Range rangeX;
+	private static Range rangeY;
 
 	// default colors
 	private static final Color DEFAULT_PEN_COLOR   = BLACK;
@@ -1707,10 +1715,11 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 			gg.DrawGraph(1000, 600, new Range(-10, 60), new Range(-10, 60),ga.getGr());
 		}
 		if(t.equals("    Manual game  ")){
-
+			manual=true;
 			}
 
 		if(t.equals("    Automatic game    ")) {
+				setAutomatic(true);
 
 		}
 		if(t.equals(" Add vertex   ")){
@@ -2022,6 +2031,57 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 		StdDraw.text(0.8, 0.8, "white text");
 	}
 
+	public static boolean isAutomatic() {
+		return automatic;
+	}
+
+	public static void setAutomatic(boolean automatic) {
+		StdDraw.automatic = automatic;
+	}
+
+	public static boolean isManual() {
+		return manual;
+	}
+
+	public static void setManual(boolean manual) {
+		StdDraw.manual = manual;
+	}
+
+	public static Color getBLACK() {
+		return BLACK;
+	}
+
+	public static Zone getPlay() {
+		return play;
+	}
+
+	public static void setPlay(Zone play) {
+		StdDraw.play = play;
+	}
+
+	public static Graph_Gui getGui() {
+		return gui;
+	}
+
+	public static void setGui(Graph_Gui gui) {
+		StdDraw.gui = gui;
+	}
+
+	public static Range getRangeX() {
+		return rangeX;
+	}
+
+	public static void setRangeX(Range rangeX) {
+		StdDraw.rangeX = rangeX;
+	}
+
+	public static Range getRangeY() {
+		return rangeY;
+	}
+
+	public static void setRangeY(Range rangeY) {
+		StdDraw.rangeY = rangeY;
+	}
 }
 
 

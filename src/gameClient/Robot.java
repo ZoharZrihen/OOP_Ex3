@@ -7,6 +7,12 @@ import utils.Point3D;
 
 import java.util.Date;
 
+/**
+ * this class represents a robot in the game.
+ * each robot has source (the current node on the graph where robot located)
+ * each robot has score from eating fruits.
+ * each robot in the game has different key.
+ */
 public class Robot {
     private int source;
     private int dest;
@@ -15,6 +21,11 @@ public class Robot {
     private double speed;
     private double score;
 
+    /**
+     * This constructor converts JSON string to robot.
+     * @param str the JSON string with all the information for the robot.
+     * @throws JSONException
+     */
     public Robot(JSONObject str) throws JSONException {
         key=str.getInt("id");
         source=str.getInt("src");
