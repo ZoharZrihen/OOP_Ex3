@@ -60,9 +60,6 @@ public class ThreadGameClient implements Runnable {
             e.printStackTrace();
         }
         Point3D p = play.getGraph().getNode(3).getLocation();
-        StdDraw.setPenColor(Color.BLACK);
-        StdDraw.setPenRadius(0.005);
-        StdDraw.text(p.x(), p.y() + 0.001, "Please press start game and then choose your option to start");
         StdDraw.enableDoubleBuffering();
         StdDraw.clear();
         StdDraw.setPlay(play);
