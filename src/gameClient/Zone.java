@@ -95,11 +95,6 @@ public class Zone {
     public ArrayList<Fruit> getFruits() {
         return fruits;
     }
-
-    public void setFruits(ArrayList<Fruit> fruits) {
-        this.fruits = fruits;
-    }
-
     public DGraph getGraph() {
         return graph;
     }

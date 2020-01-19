@@ -1,16 +1,22 @@
 package gameClient;
-
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+import java.time.LocalDateTime;
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
+/**
+ * This class creates KML file for each game, which documents the game and the moves.
+ * It is possible to open the kml file in google earth and see it on it real location.
+ */
 public class KML_Logger {
 
     private int stage;
     private StringBuilder info;
 
+    /**
+     * Constructor to init the object with the begin of kml file
+     * @param stage
+     */
 
     public KML_Logger(int stage) {
         this.stage = stage;
@@ -18,6 +24,10 @@ public class KML_Logger {
         kmlStart();
     }
 
+    /**
+     * The opening text of kml file.
+     * sets the elements in the game.
+     */
     public void kmlStart()
     {
         info.append(
@@ -60,15 +70,16 @@ public class KML_Logger {
         );
     }
 
-    public void addPlaceMark(String id, String location)
-    {
-        //Create formatter
+    /**
+     * This function adds placemark to the kml file.
+     * each object\element in the game has place mark.
+     * @param id
+     * @param location
+     */
+    public void addPlaceMark(String id, String location) {
         DateTimeFormatter FOMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        //Local date time instance
         LocalDateTime localDateTime = LocalDateTime.now();
-        //Get formatted String
         String ldtString = FOMATTER.format(localDateTime);
-
         info.append(
                 "    <Placemark>\r\n" +
                         "      <TimeStamp>\r\n" +
@@ -83,7 +94,11 @@ public class KML_Logger {
 
     }
 
-
+    /**
+     * The closing text of the kml file.
+     * This function creates the kml file and calling it by it stage name.
+     * The file is in data folder.
+     */
     public void kmlEnd()
     {
         info.append("  \r\n</Document>\r\n" +
@@ -91,10 +106,10 @@ public class KML_Logger {
         );
         try
         {
-            File f=new File("data/"+this.stage+".kml");
-            PrintWriter pw=new PrintWriter(f);
-            pw.write(info.toString());
-            pw.close();
+            File file=new File("data/"+stage+".kml");
+            PrintWriter p=new PrintWriter(file);
+            p.write(info.toString());
+            p.close();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
