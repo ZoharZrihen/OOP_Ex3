@@ -43,6 +43,13 @@ public class Zone {
                 JSONObject f2 = f.getJSONObject("Fruit");
                 Fruit fru = new Fruit(f2);
                 fruits.add(fru);
+                if (ThreadGameClient.kml != null) {
+                    if (fru.getType() == 1) {
+                        ThreadGameClient.kml.addPlaceMark("fruit-criminal", fru.getLocation().toString());
+                    } else {
+                        ThreadGameClient.kml.addPlaceMark("fruit-prisoner", fru.getLocation().toString());
+                    }
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -75,6 +82,9 @@ public class Zone {
                     JSONObject f = new JSONObject(iter_f.next().toString());
                     JSONObject f2 = f.getJSONObject("Robot");
                     Robot r = new Robot(f2);
+                    if (ThreadGameClient.kml != null) {
+                        ThreadGameClient.kml.addPlaceMark("robot", r.getLocation().toString());
+                    }
                     this.robots.add(r);
                 } catch (JSONException e) {
                     e.printStackTrace();

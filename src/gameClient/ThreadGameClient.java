@@ -27,13 +27,17 @@ import static gameClient.MyGameGUI.*;
  * Goal of the game is to eat as many fruits as possible in the given time.
  */
 public class ThreadGameClient implements Runnable {
+    private static int level;
+    public static KML_Logger kml=null;
     public static void main(String[] a) {
         Thread thread = new Thread(new ThreadGameClient());
         thread.start();
+
     }
     public void run() {
-        int scenario = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your scenario number: "));
-        game_service game = Game_Server.getServer(scenario);
+        level = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your scenario number: "));
+        kml=new KML_Logger(level);
+        game_service game = Game_Server.getServer(level);
         Zone play = new Zone(game);
         Graph_Gui gui = new Graph_Gui(play.getGraph());
         Range rangeX = new Range(gui.minXPos() - 0.001, gui.maxXPos() + 0.001);
@@ -262,6 +266,7 @@ public class ThreadGameClient implements Runnable {
         }
         String results = play.getGame().toString();
         System.out.println("Game Over: "+results);
+        kml.kmlEnd();
     }
 
     /**
@@ -287,6 +292,7 @@ public class ThreadGameClient implements Runnable {
             StdDraw.clear();
         }
         String results = play.getGame().toString();
+        kml.kmlEnd();
         System.out.println("Game Over: " + results);
     }
     }
