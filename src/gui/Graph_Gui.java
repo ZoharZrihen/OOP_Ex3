@@ -101,7 +101,7 @@ public class Graph_Gui {
 
             }
         }
-        StdDraw.save("MyGraph.jpg");
+       // StdDraw.save("MyGraph.jpg");
     }
     public void DrawGraph(int w, int h, Range rx, Range ry, DGraph g, List<String> fruits) {
         if (g == null || g.nodeSize() == 0) {

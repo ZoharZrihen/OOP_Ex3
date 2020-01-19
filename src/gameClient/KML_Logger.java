@@ -28,7 +28,7 @@ public class KML_Logger {
                         " <Style id=\"node\">\r\n" +
                         "      <IconStyle>\r\n" +
                         "        <Icon>\r\n" +
-                        "          <href>http://maps.google.com/mapfiles/kml/pal3/icon35.png</href>\r\n" +
+                        "          <href>http://maps.google.com/mapfiles/kml/pal3/icon57.png</href>\r\n" +
                         "        </Icon>\r\n" +
                         "        <hotSpot x=\"32\" y=\"1\" xunits=\"pixels\" yunits=\"pixels\"/>\r\n" +
                         "      </IconStyle>\r\n" +
@@ -36,7 +36,7 @@ public class KML_Logger {
                         " <Style id=\"fruit-prisoner\">\r\n" +
                         "      <IconStyle>\r\n" +
                         "        <Icon>\r\n" +
-                        "          <href>https://imgur.com/KzVb6Kf</href>\r\n" +
+                        "          <href>https://i.imgur.com/JKlsJmZ.png</href>\r\n" +
                         "        </Icon>\r\n" +
                         "        <hotSpot x=\"32\" y=\"1\" xunits=\"pixels\" yunits=\"pixels\"/>\r\n" +
                         "      </IconStyle>\r\n" +
@@ -44,7 +44,7 @@ public class KML_Logger {
                         " <Style id=\"fruit-criminal\">\r\n" +
                         "      <IconStyle>\r\n" +
                         "        <Icon>\r\n" +
-                        "          <href>https://imgur.com/oYbZgYg</href>\r\n" +
+                        "          <href>https://i.imgur.com/oYbZgYg.png</href>\r\n" +
                         "        </Icon>\r\n" +
                         "        <hotSpot x=\"32\" y=\"1\" xunits=\"pixels\" yunits=\"pixels\"/>\r\n" +
                         "      </IconStyle>\r\n" +
@@ -52,7 +52,7 @@ public class KML_Logger {
                         " <Style id=\"robot\">\r\n" +
                         "      <IconStyle>\r\n" +
                         "        <Icon>\r\n" +
-                        "          <href>http://maps.google.com/mapfiles/kml/pal4/icon26.png></href>\r\n" +
+                        "          <href>https://i.imgur.com/T4yl22i.png></href>\r\n" +
                         "        </Icon>\r\n" +
                         "        <hotSpot x=\"32\" y=\"1\" xunits=\"pixels\" yunits=\"pixels\"/>\r\n" +
                         "      </IconStyle>\r\n" +
