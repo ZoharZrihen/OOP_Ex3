@@ -107,11 +107,24 @@ public class ThreadGameClient implements Runnable {
                     int rid = ttt.getInt("id");
                     int src = ttt.getInt("src");
                     int dest = ttt.getInt("dest");
+                    int speed = ttt.getInt("speed");
 
                     if(dest==-1) {
-                        dest = nextNod(gg, src,play);
+                        if (rid%3 == 0)
+                             dest = nextNod(gg, src,play);
+                        else if (rid%3 == 1)
+                            dest= nextNode(gg,src,play);
+                        else
+                            dest = nextNoda(gg,src,play);
+
                         game.chooseNextEdge(rid, dest);
                         game.move();
+                        try {
+                            thread.sleep(10);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
                         System.out.println("Turn to node: "+dest+"  time to end:"+(t/1000));
                         System.out.println(ttt);
                     }
@@ -164,6 +177,16 @@ public class ThreadGameClient implements Runnable {
      * @param play
      * @return
      */
+    private int nextNoda(DGraph g, int src, Zone play){
+        int ans = -1;
+        ArrayList<Fruit> fruits=play.getFruits();
+        Fruit close = closeFruta(g,src,fruits);
+        if (close.getEdge().getDest() == src)
+            return close.getEdge().getSrc();
+        Graph_Algo ga=new Graph_Algo(g);
+        List<node_data> nodes=ga.shortestPath(src,close.getEdge().getDest());
+        return nodes.get(1).getKey();
+    }
     private int nextNod(DGraph g, int src, Zone play){
         int ans = -1;
         ArrayList<Fruit> fruits=play.getFruits();
@@ -172,9 +195,18 @@ public class ThreadGameClient implements Runnable {
             return close.getEdge().getSrc();
         Graph_Algo ga=new Graph_Algo(g);
         List<node_data> nodes=ga.shortestPath(src,close.getEdge().getDest());
-            return nodes.get(1).getKey();
+        return nodes.get(1).getKey();
     }
-
+    private int nextNode(DGraph g, int src, Zone play){
+        int ans = -1;
+        ArrayList<Fruit> fruits=play.getFruits();
+        Fruit close = closeFruit(g,src,fruits);
+        if (close.getEdge().getDest() == src)
+            return close.getEdge().getSrc();
+        Graph_Algo ga=new Graph_Algo(g);
+        List<node_data> nodes=ga.shortestPath(src,close.getEdge().getDest());
+        return nodes.get(1).getKey();
+    }
     /**
      * This function finding the closest fruit to the src location.
      * @param g the graph of the game
@@ -210,7 +242,62 @@ public class ThreadGameClient implements Runnable {
         }
         return res;
     }
+    private Fruit closeFruit(DGraph g, int src, ArrayList<Fruit> fruits) {
+        double min = Double.MAX_VALUE;
+        Fruit res = null;
+        // int ans = -1;
+        Point3D s = g.getNode(src).getLocation();
+        Iterator<Fruit> iter = fruits.iterator();
+        while (iter.hasNext()) {
+            Fruit f = iter.next();
+            if (f.getEdge() == null) {
+                setEdgeForFruit(f, g);
+            }
+            Graph_Algo ga = new Graph_Algo(g);
+            double dist;
+            if (src!=f.getEdge().getSrc() && src!=f.getEdge().getDest())
+                dist =( ga.shortestPathDist(src, f.getEdge().getSrc()) + f.getEdge().getWeight());
+            else if (src==f.getEdge().getSrc())
+                dist = f.getEdge().getWeight();
 
+            else
+                dist = 1.7*f.getEdge().getWeight();
+            if (dist*Math.pow(f.getValue(),3) < min) {
+                min = dist;
+                res = f;
+            }
+
+        }
+        return res;
+    }
+    private Fruit closeFruta(DGraph g, int src, ArrayList<Fruit> fruits) {
+        double min = Double.MAX_VALUE;
+        Fruit res = null;
+        // int ans = -1;
+        Point3D s = g.getNode(src).getLocation();
+        Iterator<Fruit> iter = fruits.iterator();
+        while (iter.hasNext()) {
+            Fruit f = iter.next();
+            if (f.getEdge() == null) {
+                setEdgeForFruit(f, g);
+            }
+            Graph_Algo ga = new Graph_Algo(g);
+            double dist;
+            if (src!=f.getEdge().getSrc() && src!=f.getEdge().getDest())
+                dist =( ga.shortestPathDist(src, f.getEdge().getSrc()) + f.getEdge().getWeight());
+            else if (src==f.getEdge().getSrc())
+                dist = f.getEdge().getWeight();
+
+            else
+                dist = 1.7*f.getEdge().getWeight();
+            if (dist*(f.getEdge().getWeight()) < min) {
+                min = dist;
+                res = f;
+            }
+
+        }
+        return res;
+    }
     /**
      * This function sets for fruit f an edge by its location.
      * The function is searching in the graph for the edge the fruit is located on.
@@ -262,18 +349,28 @@ public class ThreadGameClient implements Runnable {
             play.setRobots(play.getGame().getRobots());
             play.setFruits(play.getGame().getFruits());
             try {
-                thread.sleep(110);
+                thread.sleep(40);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            StdDraw.clear();
             moveRobots(play.getGame(), play.getGraph(), play);
+            try {
+                thread.sleep(30);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
            // StdDraw.picture((gui.minXPos()+gui.maxXPos())/2,(gui.minYPos()+gui.maxYPos())/2,"/gui/Ariel.png",rangeX.get_length(),rangeY.get_length());
             StdDraw.picture((gui.minXPos()+gui.maxXPos())/2,(gui.minYPos()+gui.maxYPos())/2,"MyGraph.jpg",rangeX.get_length(),rangeY.get_length());
             DrawFruits(play.getGame().getFruits());
             DrawRobots(play.getRobots());
             StdDraw.show();
-            StdDraw.pause(10);
-            StdDraw.clear();
+            try {
+                thread.sleep(30);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
         }
         String results = play.getGame().toString();
         System.out.println("Game Over: "+results);
