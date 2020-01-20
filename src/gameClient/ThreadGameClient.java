@@ -29,10 +29,9 @@ import static gameClient.MyGameGUI.*;
 public class ThreadGameClient implements Runnable {
     private static int level;
     public static KML_Logger kml=null;
+    public static Thread thread = new Thread(new ThreadGameClient());
     public static void main(String[] a) {
-        Thread thread = new Thread(new ThreadGameClient());
         thread.start();
-
     }
     public void run() {
         level = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your scenario number: "));
@@ -43,6 +42,7 @@ public class ThreadGameClient implements Runnable {
         Range rangeX = new Range(gui.minXPos() - 0.001, gui.maxXPos() + 0.001);
         Range rangeY = new Range(gui.minYPos() - 0.001, gui.maxYPos() + 0.001);
         gui.DrawGraph(2000, 1000, rangeX, rangeY, gui.getGr());
+        StdDraw.save("MyGraph.jpg");
         DrawFruits(play.getGame().getFruits());
         for (Fruit fruit : play.getFruits()) {
             setEdgeForFruit(fruit, gui.getGr());
@@ -65,14 +65,19 @@ public class ThreadGameClient implements Runnable {
         }
         Point3D p = play.getGraph().getNode(3).getLocation();
         StdDraw.enableDoubleBuffering();
-        StdDraw.clear();
+     //   StdDraw.clear();
         StdDraw.setPlay(play);
         StdDraw.setGui(gui);
         StdDraw.setRangeX(rangeX);
         StdDraw.setRangeY(rangeY);
+        StdDraw.picture((gui.minXPos()+gui.maxXPos())/2,(gui.minYPos()+gui.maxYPos())/2,"/gui/Ariel.png",rangeX.get_length(),rangeY.get_length());
+
+        //Drawgraph(gui.getGr());
+        StdDraw.save("GamePhoto.png");
         while (!StdDraw.isAutomatic() && !StdDraw.isManual()) {
             System.out.print("");
         }
+
         if (StdDraw.isAutomatic()) {
             Automatic(play, gui, rangeX, rangeY);
         }
@@ -191,11 +196,12 @@ public class ThreadGameClient implements Runnable {
             Graph_Algo ga = new Graph_Algo(g);
             double dist;
             if (src!=f.getEdge().getSrc() && src!=f.getEdge().getDest())
-                dist = ga.shortestPathDist(src, f.getEdge().getSrc()) + g.getNode(f.getEdge().getSrc()).getLocation().distance3D(g.getNode(f.getEdge().getDest()).getLocation());
+                dist =( ga.shortestPathDist(src, f.getEdge().getSrc()) + f.getEdge().getWeight());
             else if (src==f.getEdge().getSrc())
-                dist = g.getNode(src).getLocation().distance3D(g.getNode(f.getEdge().getDest()).getLocation());
+                dist = f.getEdge().getWeight();
+
             else
-                dist = 2*g.getNode(f.getEdge().getDest()).getLocation().distance3D(g.getNode(src).getLocation());
+                dist = 1.7*f.getEdge().getWeight();
             if (dist < min) {
                 min = dist;
                 res = f;
@@ -255,9 +261,14 @@ public class ThreadGameClient implements Runnable {
         while (play.getGame().isRunning()) {
             play.setRobots(play.getGame().getRobots());
             play.setFruits(play.getGame().getFruits());
+            try {
+                thread.sleep(110);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             moveRobots(play.getGame(), play.getGraph(), play);
-            StdDraw.picture((gui.minXPos()+gui.maxXPos())/2,(gui.minYPos()+gui.maxYPos())/2,"/gui/Ariel.png",rangeX.get_length(),rangeY.get_length());
-            Drawgraph(gui.getGr());
+           // StdDraw.picture((gui.minXPos()+gui.maxXPos())/2,(gui.minYPos()+gui.maxYPos())/2,"/gui/Ariel.png",rangeX.get_length(),rangeY.get_length());
+            StdDraw.picture((gui.minXPos()+gui.maxXPos())/2,(gui.minYPos()+gui.maxYPos())/2,"MyGraph.jpg",rangeX.get_length(),rangeY.get_length());
             DrawFruits(play.getGame().getFruits());
             DrawRobots(play.getRobots());
             StdDraw.show();
@@ -288,7 +299,7 @@ public class ThreadGameClient implements Runnable {
             DrawFruits(play.getGame().getFruits());
             DrawRobots(play.getRobots());
             StdDraw.show();
-            StdDraw.pause(10);
+           StdDraw.pause(10);
             StdDraw.clear();
         }
         String results = play.getGame().toString();

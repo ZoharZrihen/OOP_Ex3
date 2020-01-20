@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/lib" />
+      <root url="jar://$PROJECT_DIR$/../מטלה 3/מטלה 4/Ex4_v0.31/lib/GameServer_v0.32.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../מטלה 3/מטלה 4/Ex4_v0.31/lib/mysql-connector-java-5.1.47.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../מטלה 3/מטלה 4/Ex4_v0.31/lib/java-json.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="file://$PROJECT_DIR$/lib" />
+      <root url="jar://$PROJECT_DIR$/../מטלה 3/מטלה 4/Ex4_v0.31/lib/java-json.jar!/" />
     </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" type="SOURCES" />
   </library>
 </component>
