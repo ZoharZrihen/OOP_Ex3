@@ -38,7 +38,7 @@ public class ThreadGameClient implements Runnable {
     public void run() {
         level = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your scenario number: "));
         kml=new KML_Logger(level);
-        Game_Server.login(316405505);
+        //Game_Server.login(316405505);
         game_service game = Game_Server.getServer(level);
         Zone play = new Zone(game);
         Graph_Gui gui = new Graph_Gui(play.getGraph());
@@ -56,7 +56,7 @@ public class ThreadGameClient implements Runnable {
             JSONObject line = new JSONObject(info);
             JSONObject ttt = line.getJSONObject("GameServer");
             int numrobots = ttt.getInt("robots");
-            int fruts = 1 % play.getFruits().size();
+            int fruts = 2 % play.getFruits().size();
             for (int i = 0; i < numrobots; i++) {
                 game.addRobot(play.getFruits().get(fruts).getEdge().getDest());
                 fruts = (fruts + 1) % play.getFruits().size();
@@ -349,11 +349,11 @@ public class ThreadGameClient implements Runnable {
            // StdDraw.clear();
             moveRobots(play.getGame(), play.getGraph(), play);
             if (robotspeed>4)
-                dt = 50;
+                dt = 30;
             else if(robotspeed==1)
                 dt = 250;
             else if (robotspeed==2)
-                dt=195;
+                dt=140;
             try {
                     thread.sleep( dt);
             } catch (InterruptedException e) {
@@ -373,7 +373,7 @@ public class ThreadGameClient implements Runnable {
         String results = play.getGame().toString();
         System.out.println("Game Over: "+results);
         kml.kmlEnd();
-        play.getGame().sendKML(kml.toString());
+       // play.getGame().sendKML(kml.toString());
     }
 
     /**
