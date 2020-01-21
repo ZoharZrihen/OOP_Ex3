@@ -1758,9 +1758,9 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
                             }
                         }
                     }
+                    if (score > maxscore)
+                        maxscore = score;
                 }
-                    if(score>maxscore)
-                        maxscore=score;
                 bestscore.put(i,maxscore);
                 String bestforlevel="Your best score at level "+ Integer.toString(levels[i]) + " is: "+ Integer.toString(maxscore);
                 StdDraw.text((gui.maxXPos()+ gui.minXPos())/2,((gui.maxYPos()+gui.minYPos())/2)+place,bestforlevel);

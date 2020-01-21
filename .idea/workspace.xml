@@ -6,14 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb59ccdd-7d01-4231-b4b2-d4f79fee923e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GamePhoto.png" beforeDir="false" afterPath="$PROJECT_DIR$/GamePhoto.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/3.kml" beforeDir="false" afterPath="$PROJECT_DIR$/data/3.kml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/5.kml" beforeDir="false" afterPath="$PROJECT_DIR$/data/5.kml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/ThreadGameClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/ThreadGameClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/StdDraw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/StdDraw.java" afterDir="false" />
-    </list>
+    <list default="true" id="fb59ccdd-7d01-4231-b4b2-d4f79fee923e" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
