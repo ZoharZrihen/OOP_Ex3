@@ -6,7 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb59ccdd-7d01-4231-b4b2-d4f79fee923e" name="Default Changelist" comment="" />
+    <list default="true" id="fb59ccdd-7d01-4231-b4b2-d4f79fee923e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/utils/StdDraw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/StdDraw.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,8 +162,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/utils/StdDraw.java</url>
-          <line>1750</line>
-          <option name="timeStamp" value="4" />
+          <line>1752</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

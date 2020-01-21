@@ -1744,17 +1744,19 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
             for(int i=0;i<levels.length;i++){
                 String[] parts=s.split("level:"+Integer.toString(levels[i]));
                 for(int j=1;j<parts.length;j++) {
-                    try {
-                        score = Integer.parseInt(parts[j].substring(6, 10));
-
-                    } catch (Exception ex) {
+                    if(parts[j].charAt(0)=='s') {
                         try {
-                            score = Integer.parseInt(parts[j].substring(6, 9));
-                        } catch (Exception ex1) {
+                            score = Integer.parseInt(parts[j].substring(6, 10));
+
+                        } catch (Exception ex) {
                             try {
-                                score = Integer.parseInt(parts[j].substring(7, 10));
-                            } catch (Exception ex2) {
-                                score = Integer.parseInt(parts[j].substring(7, 11));
+                                score = Integer.parseInt(parts[j].substring(6, 9));
+                            } catch (Exception ex1) {
+                                try {
+                                    score = Integer.parseInt(parts[j].substring(7, 10));
+                                } catch (Exception ex2) {
+                                    score = Integer.parseInt(parts[j].substring(7, 11));
+                                }
                             }
                         }
                     }
