@@ -14,6 +14,8 @@ public class SimpleDB {
 	public static final String jdbcUrl="jdbc:mysql://db-mysql-ams3-67328-do-user-4468260-0.db.ondigitalocean.com:25060/oop?useUnicode=yes&characterEncoding=UTF-8&useSSL=false";
 	public static final String jdbcUser="student";
 	public static final String jdbcUserPassword="OOP2020student";
+	public static StringBuilder myplays=new StringBuilder();
+	public  static int numofgames;
 	
 	/**
 	 * Simple main for demonstrating the use of the Data-base
@@ -22,12 +24,12 @@ public class SimpleDB {
 	public static void main(String[] args) {
 	//		int id1 = 999;  // "dummy existing ID
 			int level = 0;
-	//		allUsers();
-	//		printLog();
-			String kml = getKML(316405505,3);
-		System.out.println(kml);
+		//System.out.println(allUsers());
+			printLog();
+		//	String kml = getKML(316405505,1);
+		//System.out.println(kml);
 	//		System.out.println("***** KML file example: ******");
-	//		System.out.println(kml);
+		//	System.out.println(kml);
 		}
 	/** simply prints all the games as played by the users (in the database).
 	 * 
@@ -43,7 +45,11 @@ public class SimpleDB {
 				
 				while(resultSet.next())
 				{
-					System.out.println("Id: " + resultSet.getInt("UserID")+","+resultSet.getInt("levelID")+","+resultSet.getInt("moves")+","+resultSet.getDate("time"));
+					if(resultSet.getInt("UserID")==316405505){
+						numofgames++;
+						myplays.append("level:" + resultSet.getString("levelID") + "score:" +resultSet.getString("score")+"moves:"+resultSet.getString("moves"));
+					}
+					//System.out.println("Id: " + resultSet.getInt("UserID")+","+resultSet.getInt("levelID")+","+resultSet.getInt("score")+","+resultSet.getInt("moves")+","+resultSet.getDate("time"));
 				}
 				resultSet.close();
 				statement.close();		

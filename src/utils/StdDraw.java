@@ -71,6 +71,7 @@ import algorithms.Graph_Algo;
 import dataStructure.DGraph;
 import dataStructure.node;
 import dataStructure.node_data;
+import gameClient.SimpleDB;
 import gameClient.ThreadGameClient;
 import gameClient.Zone;
 import gui.Graph_Gui;
@@ -738,8 +739,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 		menuBar.add(menu);
 		JMenu menu1 = new JMenu("Start game");
 		menuBar.add(menu1);
-		JMenu menu2 = new JMenu("DGraph");
-	//	menuBar.add(menu2);
+		JMenu menu2 = new JMenu("Statistics");
+		menuBar.add(menu2);
 		JMenuItem menuItem1 = new JMenuItem(" Save...   ");
 		menuItem1.addActionListener(std);
 		menuItem1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
@@ -754,21 +755,21 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 		JMenuItem menuItem22=new JMenuItem("    Automatic game    ");
 		menuItem22.addActionListener(std);
 		menu1.add(menuItem22);
-		JMenuItem menuItem3 = new JMenuItem(" Is Connected ?   ");
+		JMenuItem menuItem3 = new JMenuItem(" My game info   ");
 		menuItem3.addActionListener(std);
-		//menu1.add(menuItem3);
-		JMenuItem menuItem4 = new JMenuItem(" Add vertex   ");
+		menu2.add(menuItem3);
+		JMenuItem menuItem4 = new JMenuItem(" My Rank   ");
 		menuItem4.addActionListener(std);
 		menu2.add(menuItem4);
 		JMenuItem menuItem5 = new JMenuItem(" Remove Vertex   ");
 		menuItem5.addActionListener(std);
-		menu2.add(menuItem5);
+		//menu2.add(menuItem5);
 		JMenuItem menuItem6 = new JMenuItem(" Connect edge   ");
 		menuItem6.addActionListener(std);
-		menu2.add(menuItem6);
+		//menu2.add(menuItem6);
 		JMenuItem menuItem7 = new JMenuItem(" Remove edge   ");
 		menuItem7.addActionListener(std);
-		menu2.add(menuItem7);
+		//menu2.add(menuItem7);
 		return menuBar;
 	}
 
@@ -1722,20 +1723,17 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 				setAutomatic(true);
 
 		}
-		if(t.equals(" Add vertex   ")){
-			int key =Integer.parseInt(JOptionPane.showInputDialog(null,"Enter vertex id: "));
-			double x=Double.parseDouble(JOptionPane.showInputDialog(null,"Enter x point location"));
-			double y=Double.parseDouble(JOptionPane.showInputDialog(null,"Enter y point location"));
-			gr.addNode(new node(key,new Point3D(x,y,0)));
-			Graph_Gui gg=new Graph_Gui(gr);
-			gg.DrawGraph(1000, 600, new Range(-10, 60), new Range(-10, 60),gg.getGr());
-
+		if(t.equals(" My game info   ")){
+			SimpleDB.printLog();
+			int numofgames=SimpleDB.numofgames;
+			System.out.println(numofgames);
+			StdDraw.clear();
+			StdDraw.setPenColor(Color.BLACK);
+			StdDraw.setPenRadius(0.005);
+			StdDraw.text((gui.maxXPos()+ gui.minXPos())/2,(gui.maxYPos()+gui.minYPos())/2,Integer.toString(numofgames));
 		}
-		if(t.equals(" Remove Vertex   ")){
-			int key =Integer.parseInt(JOptionPane.showInputDialog(null,"Enter vertex id to remove "));
-			gr.removeNode(key);
-			Graph_Gui gg=new Graph_Gui(gr);
-			gg.DrawGraph(1000, 600, new Range(-10, 60), new Range(-10, 60),gg.getGr());
+		if(t.equals(" My Rank   ")){
+
 		}
 		if(t.equals(" Connect edge   ")){
 			int src =Integer.parseInt(JOptionPane.showInputDialog(null,"Enter vertex source id: "));
