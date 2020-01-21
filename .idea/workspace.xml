@@ -162,7 +162,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/utils/StdDraw.java</url>
-          <line>1752</line>
+          <line>1754</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

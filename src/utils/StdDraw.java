@@ -1741,13 +1741,15 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
             int score = 0,maxscore=0;
             double place=0.0024;
             int[] levels={0,1,3,5,9,11,13,16,19,20,23};
+            int [] moves={290,580,580,500,580,580,580,290,580,290,1140};
+            int move=0;
             for(int i=0;i<levels.length;i++){
+                 int maxmove=moves[i];
                 String[] parts=s.split("level:"+Integer.toString(levels[i]));
                 for(int j=1;j<parts.length;j++) {
                     if(parts[j].charAt(0)=='s') {
                         try {
                             score = Integer.parseInt(parts[j].substring(6, 10));
-
                         } catch (Exception ex) {
                             try {
                                 score = Integer.parseInt(parts[j].substring(6, 9));
@@ -1759,8 +1761,21 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
                                 }
                             }
                         }
+                        try{
+                            move=Integer.parseInt(parts[j].substring(15,18));
+                        }catch (Exception exc){
+                           try{
+                               move=Integer.parseInt(parts[j].substring(16,19));
+                           }catch (Exception exc1){
+                               try{
+                                   move=Integer.parseInt(parts[j].substring(15,19));
+                               }catch (Exception exc2){
+                                   move=Integer.parseInt(parts[j].substring(16,20));
+                               }
+                           }
+                        }
                     }
-                    if (score > maxscore)
+                    if (score > maxscore &&move<maxmove)
                         maxscore = score;
                 }
                 bestscore.put(i,maxscore);
