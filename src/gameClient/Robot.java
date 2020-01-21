@@ -34,6 +34,12 @@ public class Robot {
         speed=str.getDouble("speed");
         score=str.getDouble("value");
     }
+    public Robot(int id,int src,int speed,Point3D p){
+        key=id;
+        source=src;
+        this.speed=speed;
+        location=new Point3D(p);
+    }
 
     public int getSource() {
         return source;

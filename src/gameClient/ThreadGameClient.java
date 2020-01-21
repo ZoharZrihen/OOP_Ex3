@@ -30,15 +30,19 @@ public class ThreadGameClient implements Runnable {
     private static int level;
     public static KML_Logger kml=null;
     public static Thread thread = new Thread(new ThreadGameClient());
+    public static int dt=70;
+    public static int robotspeed=0;
     public static void main(String[] a) {
         thread.start();
     }
     public void run() {
         level = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your scenario number: "));
         kml=new KML_Logger(level);
+        Game_Server.login(316405505);
         game_service game = Game_Server.getServer(level);
         Zone play = new Zone(game);
         Graph_Gui gui = new Graph_Gui(play.getGraph());
+        setKML(gui.getGr());
         Range rangeX = new Range(gui.minXPos() - 0.001, gui.maxXPos() + 0.001);
         Range rangeY = new Range(gui.minYPos() - 0.001, gui.maxYPos() + 0.001);
         gui.DrawGraph(2000, 1000, rangeX, rangeY, gui.getGr());
@@ -52,7 +56,7 @@ public class ThreadGameClient implements Runnable {
             JSONObject line = new JSONObject(info);
             JSONObject ttt = line.getJSONObject("GameServer");
             int numrobots = ttt.getInt("robots");
-            int fruts = 2 % play.getFruits().size();
+            int fruts = 1 % play.getFruits().size();
             for (int i = 0; i < numrobots; i++) {
                 game.addRobot(play.getFruits().get(fruts).getEdge().getDest());
                 fruts = (fruts + 1) % play.getFruits().size();
@@ -64,13 +68,13 @@ public class ThreadGameClient implements Runnable {
             e.printStackTrace();
         }
         Point3D p = play.getGraph().getNode(3).getLocation();
-        StdDraw.enableDoubleBuffering();
+       // StdDraw.enableDoubleBuffering();
      //   StdDraw.clear();
         StdDraw.setPlay(play);
         StdDraw.setGui(gui);
         StdDraw.setRangeX(rangeX);
         StdDraw.setRangeY(rangeY);
-        StdDraw.picture((gui.minXPos()+gui.maxXPos())/2,(gui.minYPos()+gui.maxYPos())/2,"/gui/Ariel.png",rangeX.get_length(),rangeY.get_length());
+       // StdDraw.picture((gui.minXPos()+gui.maxXPos())/2,(gui.minYPos()+gui.maxYPos())/2,"/gui/Ariel.png",rangeX.get_length(),rangeY.get_length());
 
         //Drawgraph(gui.getGr());
         StdDraw.save("GamePhoto.png");
@@ -107,24 +111,13 @@ public class ThreadGameClient implements Runnable {
                     int rid = ttt.getInt("id");
                     int src = ttt.getInt("src");
                     int dest = ttt.getInt("dest");
-                    int speed = ttt.getInt("speed");
-
+                    Point3D p=new Point3D(ttt.getString("pos"));
+                    robotspeed = ttt.getInt("speed");
+                    Robot r=new Robot(rid,src,robotspeed,p);
                     if(dest==-1) {
-                        if (rid%3 == 0)
-                             dest = nextNod(gg, src,play);
-                        else if (rid%3 == 1)
-                            dest= nextNode(gg,src,play);
-                        else
-                            dest = nextNoda(gg,src,play);
-
+                        dest = nextNod(gg, src,play);
                         game.chooseNextEdge(rid, dest);
-                        game.move();
-                        try {
-                            thread.sleep(10);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
+                       // game.move();
                         System.out.println("Turn to node: "+dest+"  time to end:"+(t/1000));
                         System.out.println(ttt);
                     }
@@ -197,14 +190,18 @@ public class ThreadGameClient implements Runnable {
         List<node_data> nodes=ga.shortestPath(src,close.getEdge().getDest());
         return nodes.get(1).getKey();
     }
-    private int nextNode(DGraph g, int src, Zone play){
+    private int nextNode(DGraph g, Robot r, Zone play){
         int ans = -1;
         ArrayList<Fruit> fruits=play.getFruits();
-        Fruit close = closeFruit(g,src,fruits);
-        if (close.getEdge().getDest() == src)
+        Fruit close = closeFruit(g,r.getSource(),fruits);
+        Point3D fp=close.getLocation();
+        if (close.getEdge().getDest() == r.getSource())
             return close.getEdge().getSrc();
         Graph_Algo ga=new Graph_Algo(g);
-        List<node_data> nodes=ga.shortestPath(src,close.getEdge().getDest());
+        List<node_data> nodes=ga.shortestPath(r.getSource(),close.getEdge().getDest());
+        r.setDest(nodes.get(1).getKey());
+        edge_data e=play.getGraph().getEdge(r.getSource(),r.getDest());
+
         return nodes.get(1).getKey();
     }
     /**
@@ -233,7 +230,7 @@ public class ThreadGameClient implements Runnable {
                 dist = f.getEdge().getWeight();
 
             else
-                dist = 1.7*f.getEdge().getWeight();
+                dist = f.getEdge().getWeight()+(g.getEdge(f.getEdge().getDest(),f.getEdge().getSrc()).getWeight());
             if (dist < min) {
                 min = dist;
                 res = f;
@@ -289,7 +286,7 @@ public class ThreadGameClient implements Runnable {
                 dist = f.getEdge().getWeight();
 
             else
-                dist = 1.7*f.getEdge().getWeight();
+                dist = f.getEdge().getWeight()+(g.getEdge(f.getEdge().getDest(),f.getEdge().getSrc()).getWeight());
             if (dist*(f.getEdge().getWeight()) < min) {
                 min = dist;
                 res = f;
@@ -345,36 +342,38 @@ public class ThreadGameClient implements Runnable {
      */
     public void Automatic(Zone play, Graph_Gui gui, Range rangeX, Range rangeY){
         play.getGame().startGame();
+        int k=0;
         while (play.getGame().isRunning()) {
             play.setRobots(play.getGame().getRobots());
             play.setFruits(play.getGame().getFruits());
-            try {
-                thread.sleep(40);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            StdDraw.clear();
+           // StdDraw.clear();
             moveRobots(play.getGame(), play.getGraph(), play);
+            if (robotspeed>4)
+                dt = 50;
+            else if(robotspeed==1)
+                dt = 250;
+            else if (robotspeed==2)
+                dt=195;
             try {
-                thread.sleep(30);
+                    thread.sleep( dt);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
            // StdDraw.picture((gui.minXPos()+gui.maxXPos())/2,(gui.minYPos()+gui.maxYPos())/2,"/gui/Ariel.png",rangeX.get_length(),rangeY.get_length());
-            StdDraw.picture((gui.minXPos()+gui.maxXPos())/2,(gui.minYPos()+gui.maxYPos())/2,"MyGraph.jpg",rangeX.get_length(),rangeY.get_length());
-            DrawFruits(play.getGame().getFruits());
-            DrawRobots(play.getRobots());
-            StdDraw.show();
-            try {
-                thread.sleep(30);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if(k%1==0) {
+                StdDraw.picture((gui.minXPos() + gui.maxXPos()) / 2, (gui.minYPos() + gui.maxYPos()) / 2, "MyGraph.jpg", rangeX.get_length(), rangeY.get_length());
+                DrawFruits(play.getGame().getFruits());
+                DrawRobots(play.getRobots());
             }
+            k++;
+            //StdDraw.show();
+
 
         }
         String results = play.getGame().toString();
         System.out.println("Game Over: "+results);
         kml.kmlEnd();
+        play.getGame().sendKML(kml.toString());
     }
 
     /**
@@ -403,4 +402,31 @@ public class ThreadGameClient implements Runnable {
         kml.kmlEnd();
         System.out.println("Game Over: " + results);
     }
+    public void setKML(DGraph g)
+    {
+        for (node_data node: g.getV())
+        {
+            if (kml != null) {
+                kml.addPlaceMark("node", node.getLocation().toString());
+
+            }
+        }
+
+        for (node_data node: g.getV()) {
+            for (edge_data edge: g.getE(node.getKey())){
+                if (kml != null) {
+                    node_data src=g.getNode(edge.getSrc());
+                    node_data dst=g.getNode(edge.getDest());
+                    kml.addEdgePlacemark(src.getLocation(),dst.getLocation());
+                }
+            }
+        }
     }
+    private void setdt(edge_data e, Robot r, Point3D flocation){
+        double n=(r.getLocation().distance3D(flocation)*e.getWeight())/r.getSpeed();
+           if (dt <(int)n*10000*dt) dt = (int)n*1000000*dt;
+        //dt=(int)(10000*n/(120));
+        System.out.println("DTTTTTTTTTTTTTTTTTTTTTTTTTT"+ n);
+    }
+
+}

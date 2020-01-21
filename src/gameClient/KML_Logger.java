@@ -1,4 +1,6 @@
 package gameClient;
+import utils.Point3D;
+
 import java.io.File;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
@@ -77,19 +79,30 @@ public class KML_Logger {
      * @param location
      */
     public void addPlaceMark(String id, String location) {
-        DateTimeFormatter FOMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime localDateTime = LocalDateTime.now();
-        String ldtString = FOMATTER.format(localDateTime);
+        LocalDateTime time = LocalDateTime.now();
         info.append(
                 "    <Placemark>\r\n" +
                         "      <TimeStamp>\r\n" +
-                        "        <when>" + ldtString+ "</when>\r\n" +
+                        "        <when>" + time+ "</when>\r\n" +
                         "      </TimeStamp>\r\n" +
                         "      <styleUrl>#" + id + "</styleUrl>\r\n" +
                         "      <Point>\r\n" +
                         "        <coordinates>" + location + "</coordinates>\r\n" +
                         "      </Point>\r\n" +
                         "    </Placemark>\r\n"
+        );
+    }
+    public void addEdgePlacemark(Point3D src, Point3D dest) {
+
+        info.append("<Placemark>\r\n" +
+                "<LineString>\r\n" +
+                "<extrude>5</extrude>\r\n" +
+                "<altitudeMode>clampToGround</altitudeMode>\r\n" +
+                "<coordinates>\r\n" +
+                src.toString()+"\r\n" +
+                dest.toString()+"\r\n" +
+                "</coordinates>" +
+                "</LineString></Placemark>"
         );
 
     }
@@ -114,6 +127,9 @@ public class KML_Logger {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+    public String toString(){
+        return info.toString();
     }
 
 }
