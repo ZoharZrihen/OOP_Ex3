@@ -32,7 +32,16 @@ public class Fruit {
         value=str.getDouble("value");
         edge=null;
     }
+    public Fruit(){
+        location=new Point3D(0,0,0);
+    }
+    public Fruit(Fruit f){
+        location=f.getLocation();
+        type=f.getType();
+        value=f.getValue();
+        edge=f.getEdge();
 
+    }
     public edge_data getEdge() {
         return edge;
     }

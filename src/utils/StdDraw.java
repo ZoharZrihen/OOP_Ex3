@@ -1725,70 +1725,9 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 		}
 		if(t.equals(" My game info   ")){
 			SimpleDB.printLog();
-			int numofgames=SimpleDB.numofgames;
-			System.out.println(SimpleDB.myplays.toString());
-			System.out.println(numofgames);
-			StdDraw.clear();
-			StdDraw.setPenColor(Color.BLACK);
-			StdDraw.setPenRadius(0.005);
-			String gameans="You played "+Integer.toString(numofgames)+" games";
-            int levelindex=SimpleDB.myplays.lastIndexOf("level:");
-            String urlevel=SimpleDB.myplays.substring(levelindex+6,levelindex+8);
-            String lvlans="You are at level " + urlevel;
-            StdDraw.text((gui.maxXPos()+ gui.minXPos())/2,((gui.maxYPos()+gui.minYPos())/2)+0.003,gameans);
-            StdDraw.text((gui.maxXPos()+ gui.minXPos())/2,((gui.maxYPos()+gui.minYPos())/2)+0.0027,lvlans);
-            String s=SimpleDB.myplays.toString();
-            int score = 0,maxscore=0;
-            double place=0.0024;
-            int[] levels={0,1,3,5,9,11,13,16,19,20,23};
-            int [] moves={290,580,580,500,580,580,580,290,580,290,1140};
-            int move=0;
-            for(int i=0;i<levels.length;i++){
-                 int maxmove=moves[i];
-                String[] parts=s.split("level:"+Integer.toString(levels[i]));
-                for(int j=1;j<parts.length;j++) {
-                    if(parts[j].charAt(0)=='s') {
-                        try {
-                            score = Integer.parseInt(parts[j].substring(6, 10));
-                        } catch (Exception ex) {
-                            try {
-                                score = Integer.parseInt(parts[j].substring(6, 9));
-                            } catch (Exception ex1) {
-                                try {
-                                    score = Integer.parseInt(parts[j].substring(7, 10));
-                                } catch (Exception ex2) {
-                                    score = Integer.parseInt(parts[j].substring(7, 11));
-                                }
-                            }
-                        }
-                        try{
-                            move=Integer.parseInt(parts[j].substring(15,18));
-                        }catch (Exception exc){
-                           try{
-                               move=Integer.parseInt(parts[j].substring(16,19));
-                           }catch (Exception exc1){
-                               try{
-                                   move=Integer.parseInt(parts[j].substring(15,19));
-                               }catch (Exception exc2){
-                                   move=Integer.parseInt(parts[j].substring(16,20));
-                               }
-                           }
-                        }
-                    }
-                    if (score > maxscore &&move<maxmove)
-                        maxscore = score;
-                }
-                bestscore.put(i,maxscore);
-                String bestforlevel="Your best score at level "+ Integer.toString(levels[i]) + " is: "+ Integer.toString(maxscore);
-                StdDraw.text((gui.maxXPos()+ gui.minXPos())/2,((gui.maxYPos()+gui.minYPos())/2)+place,bestforlevel);
-                place-=0.0003;
-                maxscore=0;
-                score=0;
-            }
-
 		}
 		if(t.equals(" My Rank   ")){
-
+			SimpleDB.printTheRank();
 		}
 		if(t.equals(" Connect edge   ")){
 			int src =Integer.parseInt(JOptionPane.showInputDialog(null,"Enter vertex source id: "));

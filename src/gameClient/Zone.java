@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class Zone {
     private ArrayList<Robot> robots=new ArrayList<Robot>();
-    private ArrayList<Fruit> fruits=new ArrayList<Fruit>();
+    private static ArrayList<Fruit> fruits=new ArrayList<Fruit>();
     private DGraph graph;
     private game_service game;
 
