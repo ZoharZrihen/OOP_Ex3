@@ -232,6 +232,7 @@ public class SimpleDB {
 				StdDraw.setPenColor(Color.BLACK);
 				StdDraw.setPenRadius(0.005);
 				for (int i=0; i<levels.length;i++) {
+					place=0;
 					int nextScore = Integer.MAX_VALUE;
 					String allCustomersQuery = "SELECT userID,levelID,score,moves FROM Logs WHERE levelID ="+ levels[i]+" && moves <="+ moves[i]+" ORDER BY score DESC;";
 					ResultSet resultSet = statement.executeQuery(allCustomersQuery);
@@ -249,6 +250,7 @@ public class SimpleDB {
 							mover -= 0.0003;
 							break;
 						}
+
 					}
 					resultSet.close();
 

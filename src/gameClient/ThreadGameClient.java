@@ -175,7 +175,7 @@ public class ThreadGameClient implements Runnable {
      */
     private int nextNode(DGraph g,  int src, Zone play){
         ArrayList<Fruit> fruits=play.getFruits();
-        Fruit close = closeFruit(g,src,fruits);
+        Fruit close = closeFrt(g,src,fruits);
         play.getFruits().remove(close);
         if (close.getEdge().getDest() == src)
             return close.getEdge().getSrc();
@@ -279,17 +279,17 @@ public class ThreadGameClient implements Runnable {
             play.setFruits(play.getGame().getFruits());
             moveRobots(play.getGraph(), play);
             if (robotspeed>4)
-                dt = 6;
+                dt = 0;
             else if(robotspeed==1)
-                dt = 25;
+                dt = 55;
             else if (robotspeed==2)
-                dt=8;
+                dt=25;
             try {
                     thread.sleep( dt);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(k%1==0) {
+            if(k%2==0) {
                 StdDraw.picture((gui.minXPos() + gui.maxXPos()) / 2, (gui.minYPos() + gui.maxYPos()) / 2, "MyGraph.jpg", rangeX.get_length(), rangeY.get_length());
                 DrawFruits(play.getGame().getFruits());
                 DrawRobots(play.getRobots());
