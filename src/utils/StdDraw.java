@@ -1727,7 +1727,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 			SimpleDB.printLog();
 		}
 		if(t.equals(" My Rank   ")){
-			SimpleDB.printTheRank();
+			SimpleDB.printMyRank();
 		}
 		if(t.equals(" Connect edge   ")){
 			int src =Integer.parseInt(JOptionPane.showInputDialog(null,"Enter vertex source id: "));

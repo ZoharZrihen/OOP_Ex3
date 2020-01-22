@@ -8,14 +8,15 @@
   <component name="ChangeListManager">
     <list default="true" id="fb59ccdd-7d01-4231-b4b2-d4f79fee923e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ex3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Ex3.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GamePhoto.png" beforeDir="false" afterPath="$PROJECT_DIR$/GamePhoto.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyGraph.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/MyGraph.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/0.kml" beforeDir="false" afterPath="$PROJECT_DIR$/data/0.kml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11.kml" beforeDir="false" afterPath="$PROJECT_DIR$/data/11.kml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/Fruit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Fruit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/20.kml" beforeDir="false" afterPath="$PROJECT_DIR$/data/20.kml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Ex3/gameClient/SimpleDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ex3/gameClient/SimpleDB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Ex3/gameClient/ThreadGameClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ex3/gameClient/ThreadGameClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Ex3/utils/StdDraw.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ex3/utils/StdDraw.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameClient/SimpleDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/SimpleDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameClient/ThreadGameClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/ThreadGameClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameClient/Zone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameClient/Zone.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/StdDraw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/StdDraw.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

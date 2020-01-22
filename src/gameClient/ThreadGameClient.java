@@ -35,7 +35,7 @@ public class ThreadGameClient implements Runnable {
     public void run() {
         level = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your scenario number: "));
         kml=new KML_Logger(level);
-//        Game_Server.login(316405505);
+        Game_Server.login(316405505);
         game_service game = Game_Server.getServer(level);
         Zone play = new Zone(game);
         Graph_Gui gui = new Graph_Gui(play.getGraph());
@@ -58,11 +58,11 @@ public class ThreadGameClient implements Runnable {
             for (int i = 0; i < numrobots; i++) {
                 Fruit fu = higestfruit(fruits,new Point3D(0,0,0));
                 Fruit fu1=higestfruit(fruits,fu.getLocation());
-                play.getGame().addRobot(fu.getEdge().getDest());
-                play.getGame().addRobot(fu1.getEdge().getDest());
+                play.getGame().addRobot(fu.getEdge().getSrc());
+                play.getGame().addRobot(fu1.getEdge().getSrc());
                 i++;
                 Iterator<Fruit>iter=fruits.iterator();
-                play.getGame().addRobot(iter.next().getEdge().getDest());
+                play.getGame().addRobot(iter.next().getEdge().getSrc());
                 i++;
                 //for(int i=0;i<numrobots;i++) {
                 //  Fruit f1 = iter.next();
@@ -176,6 +176,7 @@ public class ThreadGameClient implements Runnable {
     private int nextNode(DGraph g,  int src, Zone play){
         ArrayList<Fruit> fruits=play.getFruits();
         Fruit close = closeFruit(g,src,fruits);
+        play.getFruits().remove(close);
         if (close.getEdge().getDest() == src)
             return close.getEdge().getSrc();
         Graph_Algo ga=new Graph_Algo(g);
@@ -218,7 +219,7 @@ public class ThreadGameClient implements Runnable {
                 setEdgeForFruit(f, g);
             }
             double value = f.getValue();
-             temp = value / s.distance3D(f.getLocation());
+             temp = (0.5*value) / s.distance3D(f.getLocation());
             if (temp >= dist){
                 dist = temp;
                 res=f;
@@ -278,11 +279,11 @@ public class ThreadGameClient implements Runnable {
             play.setFruits(play.getGame().getFruits());
             moveRobots(play.getGraph(), play);
             if (robotspeed>4)
-                dt = 15;
+                dt = 6;
             else if(robotspeed==1)
-                dt = 60;
+                dt = 25;
             else if (robotspeed==2)
-                dt=20;
+                dt=8;
             try {
                     thread.sleep( dt);
             } catch (InterruptedException e) {
@@ -298,7 +299,7 @@ public class ThreadGameClient implements Runnable {
         String results = play.getGame().toString();
         System.out.println("Game Over: "+results);
         kml.kmlEnd();
-  //      play.getGame().sendKML(kml.toString());
+        play.getGame().sendKML(kml.toString());
     }
 
     /**
