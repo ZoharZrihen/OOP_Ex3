@@ -7,7 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb59ccdd-7d01-4231-b4b2-d4f79fee923e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Ex3_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META_INF/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ex3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Ex3.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GamePhoto.png" beforeDir="false" afterPath="$PROJECT_DIR$/GamePhoto.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyGraph.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/MyGraph.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Ex3/gameClient/KML_Logger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ex3/gameClient/KML_Logger.class" afterDir="false" />
