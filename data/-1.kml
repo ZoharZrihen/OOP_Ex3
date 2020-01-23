@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.2">
+  <Document>
+    <name>Game stage :-1</name>
+ <Style id="node">
+      <IconStyle>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/pal3/icon57.png</href>
+        </Icon>
+        <hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+      </IconStyle>
+    </Style> <Style id="fruit-prisoner">
+      <IconStyle>
+        <Icon>
+          <href>https://i.imgur.com/JKlsJmZ.png</href>
+        </Icon>
+        <hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+      </IconStyle>
+    </Style> <Style id="fruit-criminal">
+      <IconStyle>
+        <Icon>
+          <href>https://i.imgur.com/oYbZgYg.png</href>
+        </Icon>
+        <hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+      </IconStyle>
+    </Style> <Style id="robot">
+      <IconStyle>
+        <Icon>
+          <href>https://i.imgur.com/T4yl22i.png></href>
+        </Icon>
+        <hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+      </IconStyle>
+    </Style>    <Placemark>
+      <TimeStamp>
+        <when>2020-01-23T04:02:53.515</when>
+      </TimeStamp>
+      <styleUrl>#node</styleUrl>
+      <Point>
+        <coordinates>35.207151268054346,32.10259023385377,0.0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <TimeStamp>
+        <when>2020-01-23T04:02:53.518</when>
+      </TimeStamp>
+      <styleUrl>#fruit-apple</styleUrl>
+      <Point>
+        <coordinates>36.207151268054346,33.10259023385377,0.0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <TimeStamp>
+        <when>2020-01-23T04:02:53.518</when>
+      </TimeStamp>
+      <styleUrl>#fruit-apple</styleUrl>
+      <Point>
+        <coordinates>38.207151268054346,35.10259023385377,0.0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <TimeStamp>
+        <when>2020-01-23T04:02:53.518</when>
+      </TimeStamp>
+      <styleUrl>#fruit-apple</styleUrl>
+      <Point>
+        <coordinates>39.207151268054346,36.10259023385377,0.0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <TimeStamp>
+        <when>2020-01-23T04:02:53.518</when>
+      </TimeStamp>
+      <styleUrl>#node</styleUrl>
+      <Point>
+        <coordinates>41.207151268054346,38.10259023385377,0.0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <TimeStamp>
+        <when>2020-01-23T04:02:53.518</when>
+      </TimeStamp>
+      <styleUrl>#node</styleUrl>
+      <Point>
+        <coordinates>42.207151268054346,39.10259023385377,0.0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <TimeStamp>
+        <when>2020-01-23T04:02:53.518</when>
+      </TimeStamp>
+      <styleUrl>#node</styleUrl>
+      <Point>
+        <coordinates>43.207151268054346,40.10259023385377,0.0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <TimeStamp>
+        <when>2020-01-23T04:02:53.519</when>
+      </TimeStamp>
+      <styleUrl>#robot</styleUrl>
+      <Point>
+        <coordinates>44.207151268054346,41.10259023385377,0.0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <TimeStamp>
+        <when>2020-01-23T04:02:53.519</when>
+      </TimeStamp>
+      <styleUrl>#robot</styleUrl>
+      <Point>
+        <coordinates>45.207151268054346,42.10259023385377,0.0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <TimeStamp>
+        <when>2020-01-23T04:02:53.519</when>
+      </TimeStamp>
+      <styleUrl>#fruit-apple</styleUrl>
+      <Point>
+        <coordinates>46.207151268054346,43.10259023385377,0.0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <TimeStamp>
+        <when>2020-01-23T04:02:53.519</when>
+      </TimeStamp>
+      <styleUrl>#fruit-apple</styleUrl>
+      <Point>
+        <coordinates>47.207151268054346,44.10259023385377,0.0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <TimeStamp>
+        <when>2020-01-23T04:02:53.519</when>
+      </TimeStamp>
+      <styleUrl>#fruit-apple</styleUrl>
+      <Point>
+        <coordinates>48.207151268054346,45.10259023385377,0.0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <TimeStamp>
+        <when>2020-01-23T04:02:53.519</when>
+      </TimeStamp>
+      <styleUrl>#robot</styleUrl>
+      <Point>
+        <coordinates>49.207151268054346,46.10259023385377,0.0</coordinates>
+      </Point>
+    </Placemark>
+  
+</Document>
+</kml>

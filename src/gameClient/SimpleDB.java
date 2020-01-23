@@ -42,7 +42,10 @@ public class SimpleDB {
 		}
 
 		/**
-		 * simply prints all the games as played by the users (in the database).
+		 * This function prints in the gui the following data:
+		 * Number of game you've played.
+		 * Your current level.
+		 * Your best score in each level.
 		 */
 		public static void printLog() {
 			try {
@@ -217,6 +220,10 @@ public class SimpleDB {
 			return ans;
 		}
 
+		/**
+		 * This function is taking all the infromation from the database in the sql server,
+		 * and printing your rank in the server of each level.
+		 */
 
 		public static void printMyRank() {
 			int[] levels = {0, 1, 3, 5, 9, 11, 13, 16, 19, 20, 23};

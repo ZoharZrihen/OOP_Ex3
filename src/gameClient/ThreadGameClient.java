@@ -32,6 +32,13 @@ public class ThreadGameClient implements Runnable {
     public static void main(String[] a) {
         thread.start();
     }
+
+    /**
+     * This is running the thread.
+     * making all the prepartions for the game-
+     * locating the robots on their place, drawing the graph, the robots and the fruits.
+     * waiting for the user to choose his game mode- auto or manual.
+     */
     public void run() {
         level = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter your scenario number: "));
         kml=new KML_Logger(level);
@@ -54,23 +61,16 @@ public class ThreadGameClient implements Runnable {
             JSONObject ttt = line.getJSONObject("GameServer");
             int numrobots = ttt.getInt("robots");
             ArrayList<Fruit> fruits=play.getFruits();
-            System.out.println(numrobots);
             for (int i = 0; i < numrobots; i++) {
                 Fruit fu = higestfruit(fruits,new Point3D(0,0,0));
-                Fruit fu1=higestfruit(fruits,fu.getLocation());
+                //Fruit fu1=higestfruit(fruits,fu.getLocation());
                 play.getGame().addRobot(fu.getEdge().getSrc());
-                play.getGame().addRobot(fu1.getEdge().getSrc());
-                i++;
-                Iterator<Fruit>iter=fruits.iterator();
-                play.getGame().addRobot(iter.next().getEdge().getSrc());
-                i++;
-                //for(int i=0;i<numrobots;i++) {
-                //  Fruit f1 = iter.next();
-                //if (fu.getValue() != f1.getValue()) {
-                //  play.getGame().addRobot(f1.getEdge().getDest());
-                //} else {
-                // f1= iter.next();
-                // play.getGame().addRobot(f1.getEdge().getDest());
+                //play.getGame().addRobot(fu1.getEdge().getSrc());
+                //i++;
+                //Iterator<Fruit>iter=fruits.iterator();
+                //play.getGame().addRobot(iter.next().getEdge().getSrc());
+                //i++;
+
             }
             play.setRobots(game.getRobots());
             DrawRobots(play.getRobots());
@@ -154,7 +154,6 @@ public class ThreadGameClient implements Runnable {
                         int rid = Integer.parseInt(JOptionPane.showInputDialog(null, "Please choose robot id to move"));
                         dest = Integer.parseInt(JOptionPane.showInputDialog(null, "Please choose destination to move the robot"));
                         game.chooseNextEdge(rid, dest);
-                        game.move();
                         System.out.println("Turn to node: "+dest+"  time to end:"+(t/1000));
                         System.out.println(ttt);
                     }
@@ -207,6 +206,16 @@ public class ThreadGameClient implements Runnable {
         }
         return res;
     }
+
+    /**
+     * This function is second algorithm for the auto move of the robots.
+     * This algorithm calculating which fruit is the close with the following formula:
+     * 0.5*Fruit's value / distance from the source to the robot
+     * @param g graph of the game
+     * @param src location of current robot.
+     * @param fruits the current fruits in the game.
+     * @return the closest fruit by the algorithm formula.
+     */
     private Fruit closeFruit(DGraph g, int src, ArrayList<Fruit> fruits) {
         Fruit res = null;
         Point3D s = g.getNode(src).getLocation();
@@ -316,13 +325,14 @@ public class ThreadGameClient implements Runnable {
             play.setRobots(play.getGame().getRobots());
             play.setFruits(play.getGame().getFruits());
             MoveRobotManual(play.getGame(), play.getGraph(), play);
-            StdDraw.picture((gui.minXPos() + gui.maxXPos()) / 2, (gui.minYPos() + gui.maxYPos()) / 2, "/gui/Ariel.png", rangeX.get_length(), rangeY.get_length());
-            Drawgraph(gui.getGr());
+            try {
+                thread.sleep(120);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            StdDraw.picture((gui.minXPos() + gui.maxXPos()) / 2, (gui.minYPos() + gui.maxYPos()) / 2, "MyGraph.jpg", rangeX.get_length(), rangeY.get_length());
             DrawFruits(play.getGame().getFruits());
             DrawRobots(play.getRobots());
-            StdDraw.show();
-           StdDraw.pause(10);
-            StdDraw.clear();
         }
         String results = play.getGame().toString();
         kml.kmlEnd();
@@ -344,6 +354,14 @@ public class ThreadGameClient implements Runnable {
             }
         }
     }
+
+    /**
+     * This function is searching for the fruit with the highest value so we can
+     * locate the robot in the begining on this fruit.
+     * @param fruits
+     * @param p
+     * @return
+     */
     private Fruit higestfruit(ArrayList<Fruit> fruits,Point3D p) {
         Iterator<Fruit> iter=fruits.iterator();
         double value=0;

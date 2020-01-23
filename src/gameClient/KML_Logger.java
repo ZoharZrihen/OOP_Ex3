@@ -75,6 +75,7 @@ public class KML_Logger {
     /**
      * This function adds placemark to the kml file.
      * each object\element in the game has place mark.
+     * each vetex of the graph and edge has place mark.
      * @param id
      * @param location
      */
