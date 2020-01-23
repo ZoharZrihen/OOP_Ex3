@@ -42,7 +42,7 @@ public class ThreadGameClient implements Runnable {
         setKML(gui.getGr());
         Range rangeX = new Range(gui.minXPos() - 0.001, gui.maxXPos() + 0.001);
         Range rangeY = new Range(gui.minYPos() - 0.001, gui.maxYPos() + 0.001);
-        gui.DrawGraph(2000, 1000, rangeX, rangeY, gui.getGr());
+        gui.DrawGraph(800, 600, rangeX, rangeY, gui.getGr());
         StdDraw.save("MyGraph.jpg");
         DrawFruits(play.getGame().getFruits());
         for (Fruit fruit : play.getFruits()) {

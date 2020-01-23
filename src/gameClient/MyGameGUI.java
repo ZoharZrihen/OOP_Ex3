@@ -31,10 +31,10 @@ public class MyGameGUI {
                 JSONObject f2=f.getJSONObject("Fruit");
                 Fruit fru=new Fruit(f2);
                 if(fru.getType()==1) {
-                    StdDraw.picture(fru.getLocation().x(), fru.getLocation().y(), "/gui/criminal.png", 0.0005, 0.0005);
+                    StdDraw.picture(fru.getLocation().x(), fru.getLocation().y(), "/gui/criminal.PNG", 0.0005, 0.0005);
                 }
                 if(fru.getType()==-1){
-                    StdDraw.picture(fru.getLocation().x(), fru.getLocation().y(), "/gui/prisoner.png", 0.0007, 0.0005);
+                    StdDraw.picture(fru.getLocation().x(), fru.getLocation().y(), "/gui/prisoner.PNG", 0.0007, 0.0005);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -52,7 +52,7 @@ public class MyGameGUI {
         Iterator iter=robots.iterator();
         while(iter.hasNext()){
             Robot r= (Robot) iter.next();
-            StdDraw.picture(r.getLocation().x(),r.getLocation().y(),"/gui/police.png",0.0007, 0.0005);
+            StdDraw.picture(r.getLocation().x(),r.getLocation().y(),"/gui/police.PNG",0.0007, 0.0005);
             StdDraw.setPenColor(Color.red);
             StdDraw.setPenRadius(0.009);
             StdDraw.text(r.getLocation().x(),r.getLocation().y()+0.0005,Integer.toString(r.getKey()));

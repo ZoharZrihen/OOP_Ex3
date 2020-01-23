@@ -28,7 +28,7 @@ public class Graph_Gui {
 
     public static void main(String[] args) {
         Graph_Gui gg = new Graph_Gui();
-        gg.DrawGraph(1000, 600, new Range(-10, 60), new Range(-10, 60),gg.getGr());
+        gg.DrawGraph(800, 600, new Range(-10, 60), new Range(-10, 60),gg.getGr());
         DGraph g=new DGraph();
         g.addNode(new node(1,new Point3D(20,20,0)));
         g.addNode(new node(2,new Point3D(30,30,0)));
